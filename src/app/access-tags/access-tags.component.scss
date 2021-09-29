@@ -1,0 +1,30 @@
+.type {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+
+  img {
+    display: inline-block;
+    margin: 0 5px 0 0;
+  }
+
+  span {
+    font-size: 11px;
+    text-transform: capitalize;
+    color: var(--white);
+    font-weight: var(--font-bold);
+  }
+
+  &.public {
+    background: var(--light-green);
+  }
+
+  &.private {
+    background: var(--yellow);
+  }
+
+  &.mixed {
+    background: var(--light-blue);
+  }
+}

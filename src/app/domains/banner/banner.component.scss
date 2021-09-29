@@ -1,0 +1,30 @@
+.banner {
+  position: relative;
+  width: 100%;
+  background: url("./../../../assets/dataset-banner.png") no-repeat right;
+  background-size: cover;
+  margin: 0;
+
+  .container {
+    h2 {
+      color: var(--white);
+      font-weight: var(--font-extra-bold);
+      font-size: 35px;
+      padding: 75px 0 15px;
+    }
+
+    p {
+      color: var(--white);
+      font-weight: var(--font-extra);
+      padding: 0 0 75px;
+    }
+  }
+}
+
+
+@media (max-width: 768px) {
+  .banner {
+    background: url("./../../../assets/dataset-banner-mobile.png") no-repeat right;
+    background-size: cover;
+  }
+}

@@ -1,0 +1,48 @@
+.section-provider {
+  height: 450px;
+  background: url("../../../assets/provider-banner.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+
+  h2 {
+    color: var(--white);
+    font-weight: 600;
+    font-size: 45px;
+    margin: 0;
+    line-height: 1;
+  }
+
+  p {
+    color: var(--white);
+    margin: 25px 0;
+    width: 50%;
+  }
+
+  .buttons {
+    .btn {
+      margin: 0 20px 0 0;
+    }
+  }
+}
+
+
+@media (max-width: 500px) {
+  .section-provider {
+    height: 345px;
+
+    h2 {
+      font-size: 26px;
+    }
+    p{
+      width: 100%;
+    }
+
+    .buttons {
+      .btn {
+        padding: 20px 20px;
+        margin: 0 10px 0 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+<div class="card-container">
+  <div class="title">
+    <h3>{{ resource.label }}</h3>
+    <app-access-tags
+      [type]="dataset.accessPolicy === 'OPEN' ? 'public' : (dataset.accessPolicy === 'SECURE' ? 'private' : 'mixed')"></app-access-tags>
+  </div>
+  <p>{{ resource.description }}</p>
+  <div class="col-container">
+    <div class="flex links-holder">
+      <div *ngIf="resource.dataSampleFile" class="col col-left">
+        <img src="/assets/download.svg"/>
+        <a [href]="resource.dataSampleFile" target="_blank">Download sample
+          data</a>
+      </div>
+      <div *ngIf="resource.dataSample" class="col col-left">
+        <img src="/assets/eye.svg"/>
+        <a
+          (click)="openSampleData(resource.dataSample); $event.stopPropagation()">View
+          sample data</a>
+      </div>
+      <div
+        *ngIf="dataset.resourceType == 'MESSAGESTREAM' && dataset.accessPolicy != 'SECURE'"
+        (click)="openLatestData(resource.id)" class="col col-left">
+        <img src="/assets/eye.svg"/>
+        <span>View Latest Data</span>
+      </div>
+      <div
+        *ngIf="resource.resourceType == 'GSLAYER' && resource.dataDescriptor?.location.dataSchema == 'iudx:Point'"
+        class="col col-left">
+        <img src="./../../../assets/map.svg"/>
+        <span (click)="openGsMap(resource)">Map view</span>
+      </div>
+      <div class="col col-left" (click)="toggleDataDescriptors()"
+           *ngIf="resource.dataDescriptor"
+           class="flex toggler">
+        <div class="col col-right">Show data descriptors</div>
+        <img *ngIf="showDataDescriptors" class="toggle"
+             src="./../../../assets/arrow-up.svg"/>
+        <img *ngIf="!showDataDescriptors" class="toggle"
+             src="./../../../assets/arrow-down.svg"/>
+      </div>
+      <!-- <div class="col col-left" (click)="openFilesPopup()">
+        <img src="./../../../assets/files.svg"/>
+        <span>4 Files(.json)</span>
+      </div> -->
+    </div>
+
+  </div>
+
+
+  <div *ngIf="showDataDescriptors">
+    <hr/>
+    <div class="descriptor-box"
+         *ngFor="let resource of data_descriptor; let i = index;">
+      <h3 class="descriptor" (click)="toggle(i)"> {{ resource[0].value }}
+        <img src="assets/minus.svg" *ngIf="flags[i]">
+        <img src="assets/plus.svg" *ngIf="!flags[i]">
+      </h3>
+      <div class="descriptor-child" *ngIf="flags[i]">
+        <div *ngFor="let key of resource;let j=index;">
+          <div *ngIf="j != 0 && typeOf(key.value) != 'object'">
+            <p>
+              {{key.key}}: <span> {{key.value}}</span>
+            </p>
+          </div>
+          <div *ngIf="j != 0 && typeOf(key.value) == 'object'">
+            <p>
+              {{key.key}}:
+            </p>
+            <div *ngFor="let item of key.value;let k=index;" class="level_2">
+              <div *ngIf="k != 0 && typeOf(item.value) != 'object'">
+                <p>
+                  {{item.key}}: <span> {{item.value}}</span>
+                </p>
+              </div>
+              <div *ngIf="k != 0 && typeOf(item.value) == 'object'">
+                <p>
+                  <span>{{item.key}}: </span>
+                </p>
+                <div *ngFor="let data of item.value" class="level_3">
+                  <p>
+                    <span>{{data.key}}: </span> {{data.value}}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

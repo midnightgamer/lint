@@ -1,0 +1,15 @@
+<div class="dataset-card">
+  <div class="publisher">
+    <img [src]="dataset.icon" >
+    <span>{{dataset.provider.description}}</span>
+  </div>
+  <h2>
+    {{dataset.label}}
+  </h2>
+  <div class="resources">
+    <app-access-tags [type]="dataset.accessPolicy === 'OPEN' ? 'public' : (dataset.accessPolicy === 'SECURE' ? 'private' : 'mixed')"></app-access-tags>
+    <div class="count">
+      <span>{{dataset.resources}}</span>Resources
+    </div>
+  </div>
+</div>

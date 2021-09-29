@@ -1,0 +1,54 @@
+<div class="overlay"></div>
+<div class="subscriber-container">
+  <div class="subscriber-title">
+    <h1>Data Subscriber</h1>
+    <img (click)="closePopup()" src="./../../../assets/close.svg" />
+  </div>
+
+  <div class="flex-container">
+    <div class="col-left">
+      <div (click)="toggleOptions()" class="select-box-container">
+        <div class="left">
+          <span> Select Resource</span>
+          <div class="selected">2 Selected</div>
+        </div>
+        <div class="right">
+          <img (click)="closePopup()" src="./../../../assets/dropdown.svg"/>
+        </div>
+        <ul *ngIf="showOptions" class="select-box">
+          <li>2 Selected</li>
+          <li>3 Selected</li>
+          <li>4 Selected</li>
+        </ul>
+      </div>
+
+      <h3>Bengaluru Air Quality Monitoring Sensors</h3>
+      <p>
+        datakaveri.org/facec5182e3bf44cc3ac42b0b611263676d668a2/rs.iudx.org.in/agartala-env-aqm
+      </p>
+      <hr class="divider"/>
+      <h3>From surveillance/traffic cameras in Bangalore city</h3>
+      <p>
+        datakaveri.org/facec5182e3bf44cc3ac42b0b611263676d668a2/file.iudx.org.in/agartala-camera-feeds/Agartala_OrientChowmuhani_Surv_Fixed_RSBhawan_Cam2
+      </p>
+      <button [classList]="subscribed?'ghost':null"
+              (click)="toggleSubscription()">
+        {{subscribed ? 'Unsubscribe' : 'Subscribe'}}
+      </button>
+    </div>
+
+    <div class="col-right">
+      <div class="data">
+        <h1 class="data-title">Subscription details</h1>
+        <ul *ngIf="subscribed">
+          <li *ngFor="let item of dummyData">
+            <img src="assets/copy.svg" (click)="copyResults(item.data)">
+            <h3>{{item.name}}</h3>
+            <p>Content type: <span>{{item.type}}</span></p>
+            <code>{{item.data}}</code>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

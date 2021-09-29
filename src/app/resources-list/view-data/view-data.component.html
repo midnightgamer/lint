@@ -1,0 +1,54 @@
+<div class="overlay"></div>
+<div class="viewData-container" (click)="closeAllSubQueryPopup($event)">
+  <div class="title flex-center">
+    <h1>View Data</h1>
+    <span (click)="copyResource()" class='flex-center'>
+            <img src='assets/copy.svg'/>
+            Copy resource ID
+        </span>
+    <img (click)="closePopup()" class='close' src="assets/close.svg"
+         />
+  </div>
+  <div class="alert">
+    <img class='close' src="assets/info.svg" />
+    You need permission to view both URL and query. Please request for access.
+  </div>
+  <div class="body">
+    <div class="criteria">
+      <div class="query">
+        <span>Query criteria</span>
+        <img src='assets/questionmark.svg'/>
+      </div>
+      <div class="custom flex-center">
+        <img src='assets/create.svg'/>
+        <span>Create custom</span>
+      </div>
+    </div>
+    <div class="filters">
+        <span *ngFor="let query of queries"
+              [classList]="query.inUse?'selected':''"
+              (click)="selectQuery(query.name)">
+          {{query.name}}
+          <img src="assets/edit.svg" (click)="toggleEditing($event,query)">
+          <img (click)="unselectQuery($event,query.name)"
+               src="assets/close-blue.svg">
+          <span *ngIf="query.query && query.editing" class="query-popup">
+              <span class="item"
+                    [class]="item.selected?'active':''"
+                    *ngFor="let item of query.query"
+                    (click)="toggleSubQuery($event,query,item.name)">{{item.name}}</span>
+          </span>
+        </span>
+    </div>
+    <hr/>
+    <div class="results">
+      <div class="results-title">Query Results</div>
+      <a (click)="runQuery($event)">Run Query</a>
+    </div>
+    <input type="text">
+    <div class="textarea">
+      <img *ngIf="query" (click)="copyResultQuery()" src="assets/copy.svg">
+      <textarea disabled [value]="query?dummyQuery:''" rows="5"></textarea>
+    </div>
+  </div>
+</div>

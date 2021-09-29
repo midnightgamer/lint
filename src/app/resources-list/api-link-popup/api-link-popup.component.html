@@ -1,0 +1,20 @@
+<div class="overlay"></div>
+<div class="api-container">
+  <div class="title">
+    <div>
+      <img src="assets/back.svg" (click)="backToFiles()">
+      <h1>API link</h1>
+    </div>
+    <img (click)="closePopup()" src="./../../../assets/close.svg"/>
+  </div>
+  <div class="copy-container">
+    <div class="copy">
+
+      <img src="assets/copy.svg" (click)="copyLink()">
+      <p>
+        {{link}}
+      </p>
+    </div>
+  </div>
+
+</div>

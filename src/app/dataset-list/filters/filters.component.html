@@ -1,0 +1,37 @@
+<div class="filter-section">
+  <div class="container">
+    <h2>
+      Featured datasets
+    </h2>
+  </div>
+</div>
+<div class="filters-section">
+  <div class="container">
+    <div class="filters">
+      <div class="filter" *ngFor="let filter of filters" (click)="openPopup(filter)">
+        {{filter}}
+        <img src="./../../../assets/dropdown.svg" >
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-selected">
+  <div class="container">
+    <ul >
+      <li *ngFor="let domain of filter_tags.domains">
+        domain - {{domain.name}}
+        <img src="assets/close-tag.svg" (click)="removeTag('domains', domain)">
+      </li>
+      <li *ngFor="let tag of filter_tags.tags">
+        tag - {{tag}}
+        <img src="assets/close-tag.svg" (click)="removeTag('tags', tag)">
+      </li>
+      <li *ngFor="let provider of filter_tags.providers">
+        publisher - {{provider.description}}
+        <img src="assets/close-tag.svg" (click)="removeTag('providers', provider)">
+      </li>
+    </ul>
+  </div>
+</div>
+<app-filter-popup [filter]="filters_data" [type]="type"
+  *ngIf="popup_status && popup_type === 'show-filter'"></app-filter-popup>

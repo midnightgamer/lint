@@ -1,0 +1,10 @@
+<div class="section-resources">
+  <div class="container">
+    <h1>Resources</h1>
+    <app-resource-card
+      *ngFor="let item of resources"
+      [resource]="item"
+      [dataset]="dataset"
+    ></app-resource-card>
+  </div>
+</div>

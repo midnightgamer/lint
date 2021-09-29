@@ -1,0 +1,31 @@
+<div class="overlay" (click)="closePopup()"></div>
+<div class="popup">
+  <div class="header">
+    <div class="head">
+      <h2>Filter by <span>{{type}}</span></h2>
+      <img src="assets/close.svg" (click)="closePopup()">
+    </div>
+    <div class="searchbar">
+      <img src="./../../../assets/search.svg" >
+      <input type="text" placeholder="Search" autofocus
+             (ngModelChange)="handleSearchInput($event)" autocomplete="off"
+             [(ngModel)]="query">
+    </div>
+  </div>
+  <div class="filters">
+    <div class="filter" *ngFor="let item of searched" (click)="toggleFilter(item)">
+      <img [src]="isSelected(item)?'/assets/checked.svg':'/assets/unchecked.svg'" >
+      <span *ngIf="type == 'tags'">{{item}}</span>
+      <span *ngIf="type == 'domains'">{{item.name}}</span>
+      <span *ngIf="type == 'providers'">{{item.description}}</span>
+    </div>
+  </div>
+  <div class="clear">
+    <span (click)="clearAll()">
+      Clear all filters
+    </span>
+    <span (click)="apply()">
+      Apply filters
+    </span>
+  </div>
+</div>

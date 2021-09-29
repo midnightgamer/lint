@@ -1,0 +1,30 @@
+<div class="overlay" (click)="close_filter()"></div>
+<div class="popup">
+  <div class="header">
+    <div class="head">
+      <h2>Filter by <span>{{type}}</span></h2>
+      <img src="assets/close.svg" (click)="closePopup()">
+    </div>
+    <div class="searchbar">
+      <img src="./../../../assets/search.svg" >
+      <input type="text" placeholder="Search" autofocus
+             (ngModelChange)="handleSearchInput($event)" autocomplete="off"
+             [(ngModel)]="query">
+    </div>
+  </div>
+  <div class="filters">
+    <div class="filter"  *ngFor="let dataset of datasets" (click)="toggle_dataset(dataset)" title="{{ dataset.label }}">
+      <img
+        [src]="checkdataset(dataset)?'/assets/checked.svg':'/assets/unchecked.svg'">
+      <span>{{dataset.label}}</span>
+    </div>
+  </div>
+  <div class="clear">
+    <span (click)="apply_filter()">
+      Apply filters
+    </span>
+    <span (click)="clear()">
+      Clear all filters
+    </span>
+  </div>
+</div>

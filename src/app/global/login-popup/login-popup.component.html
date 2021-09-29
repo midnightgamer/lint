@@ -1,0 +1,18 @@
+<div class="overlay"></div>
+<div class="popup">
+  <div class="head">
+    <h2>Login needed</h2>
+    <img (click)="closePopup()" src="assets/close.svg">
+  </div>
+  <div class="body">
+    <span>Login/Register</span>
+    <p>
+      Please sign in or sing up into your IUDX accounts panel to continue with
+      this request.
+    </p>
+    <div class="buttons">
+      <button>Login/Register</button>
+      <div class="cancel" (click)="closePopup()">Cancel</div>
+    </div>
+  </div>
+</div>

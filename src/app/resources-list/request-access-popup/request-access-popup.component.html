@@ -1,0 +1,34 @@
+<div class="overlay"></div>
+<div class="popup">
+  <div class="head">
+    <h2>Request for dataset</h2>
+    <img (click)="closePopup()" src="assets/close.svg">
+  </div>
+  <div class="body">
+    <span>Dataset</span>
+    <h3>
+      Physical locations of bike docking stations in Bhopal city
+    </h3>
+    <div class="expires">
+      <span>Policy expires in *</span>
+      <div class="input-container">
+        <label>
+          Years
+          <input type="text" value="1" maxlength="1">
+        </label>
+        <label>
+          Months
+          <input type="text" value="0" maxlength="2">
+        </label>
+        <label>
+          Days
+          <input type="text" value="0" maxlength="2">
+        </label>
+      </div>
+    </div>
+    <div class="buttons">
+      <button>Save</button>
+      <div class="cancel" (click)="closePopup()">Cancel</div>
+    </div>
+  </div>
+</div>

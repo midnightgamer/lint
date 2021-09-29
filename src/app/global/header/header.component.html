@@ -1,0 +1,42 @@
+<header>
+  <div class="left">
+    <a routerLink="/">
+      <img src="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/iudx.png"  class="logo"/>
+    </a>
+  </div>
+
+  <div class="right">
+    <img class="search-icon" (click)="openSearchPopup()"
+         src="assets/search.svg">
+
+    <div class="user" *ngIf="isLoggedIn" (click)="toggleProfile($event)">
+      <img src="assets/user.svg">
+      <div class="userPopup" *ngIf="showProfilePopup">
+        <div class="userInfo">
+          <span>{{user_profile.name.firstName}} {{user_profile.name.lastName}}</span>
+          <p>{{user_profile.email}}</p>
+        </div>
+        <ul class="panels">
+          <li>Your Dashboard</li>
+        </ul>
+        <div class="logout" (click)="logout($event)">
+          Sign out
+        </div>
+      </div>
+    </div>
+    <div class="btn" *ngIf="!isLoggedIn" (click)="loggedIn()">
+      Login/Register
+    </div>
+    <div (click)="openMenu()" class="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+</header>
+<app-menu *ngIf="popup_status && popup_type == 'menu'"></app-menu>
+<app-search-popup
+  *ngIf="popup_status && popup_type == 'search-popup'"></app-search-popup>
+<app-login-popup
+  *ngIf="popup_status && popup_type == 'login-popup'"
+></app-login-popup>

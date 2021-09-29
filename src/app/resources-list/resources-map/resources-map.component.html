@@ -1,0 +1,17 @@
+<style>
+
+
+</style>
+
+<div class="map-container">
+  <img *ngIf="!datasets?.dataDescriptor"
+       src="./../../../assets/map-landing.svg"/>
+  <div class="map">
+    <div *ngIf="datasets?.dataDescriptor" id="map"
+         leaflet (leafletMapReady)="on_map_ready($event)"
+         [leafletOptions]="leaflet_options"
+    >
+    </div>
+
+  </div>
+</div>

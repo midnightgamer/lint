@@ -1,0 +1,8 @@
+<div class="section-datasets">
+  <div class="container">
+    <app-dataset-card (click)="goToSingleResource(item)"
+                      *ngFor="let item of datasets"
+                      [dataset]="item"></app-dataset-card>
+    <p *ngIf="datasets.length === 0">No relevant datasets found. Please modify the search text or filters applied.</p>
+  </div>
+</div>

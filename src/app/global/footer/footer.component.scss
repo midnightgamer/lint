@@ -1,0 +1,147 @@
+footer {
+  padding: 60px 30px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .col-1 {
+    width: 25%;
+    display: inline-block;
+
+    img {
+      display: inline-block;
+      margin-bottom: 25px;
+      width: 94px;
+    }
+
+    .place {
+      display: flex;
+      align-items: baseline;
+
+      img {
+        width: 12px;
+        margin-right: 10px;
+      }
+
+      span {
+        font-size: 14px;
+        color: var(--grey);
+      }
+    }
+  }
+
+
+  .col-3 {
+    margin: 0 0 0 auto;
+    display: inline-block;
+    justify-content: space-between;
+    align-items: center;
+
+
+
+    .flex-parent {
+      display: flex;
+      width: 30%;
+      justify-content: space-between;
+      a {
+        align-self: center;
+
+        &:not(:last-child) {
+          margin-right: 30px;
+        }
+      }
+      img {
+
+      }
+
+      .cityLogo {
+        width: 112px;
+      }
+
+      .smart-city-logo {
+        width: 62px;
+      }
+
+      .ministry-logo {
+        width: 208px;
+      }
+
+      .iisc-logo {
+        width: 58px;
+      }
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  footer {
+    padding: 25px 14px;
+    flex-direction: column;
+
+    .container {
+      flex-direction: column;
+    }
+
+    .col-1 {
+      width: 75%;
+      margin-bottom: 20px;
+
+      img {
+        margin-bottom: 10px;
+      }
+
+      .place {
+        align-items: flex-start;
+
+        span {
+          font-size: 12px;
+        }
+
+        img {
+          padding-top: 5px;
+        }
+      }
+    }
+
+    .col-2 {
+      width: 100%;
+
+      a {
+        font-size: 12px;
+      }
+
+      h3 {
+        font-size: 15px;
+        margin-bottom: 10px;
+      }
+
+      ul > li {
+        margin-bottom: 6px;
+      }
+    }
+
+    .col-3 {
+      width: 100%;
+      justify-content: center;
+
+      .flex-parent {
+        display: inline;
+
+        img {
+          display: block;
+          margin-left: auto;
+          margin-right: auto !important;
+
+          &:not(:last-child) {
+            margin-bottom: 20px;
+          }
+        }
+      }
+    }
+  }
+}

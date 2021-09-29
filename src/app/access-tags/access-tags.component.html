@@ -1,0 +1,4 @@
+<span [ngClass]="'type ' + type">
+    <img [src]="type === 'private'?'assets/private.svg':'assets/public.svg'">
+    <span>{{type}}</span>
+</span>

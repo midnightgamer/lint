@@ -1,0 +1,23 @@
+<section class="section-dataset">
+  <div class="container">
+    <div class="section-title">
+      <h2>
+        Recently added datasets  <span *ngIf="city"> in
+        <span>{{city.name}}</span></span>
+      </h2>
+      <p>
+        Search and find from {{summary.datasets}} datasets, {{summary.resources}} resources and {{summary.providers}} publishers
+      </p>
+    </div>
+    <div class="dataset-card-container">
+      <app-dataset-card (click)="goToSingleResource(item)" *ngFor="let item of datasets"
+                        [dataset]="item"></app-dataset-card>
+    </div>
+    <a (click)="doSearch()">
+      <button>
+        View All Datasets
+      </button>
+    </a>
+  </div>
+
+</section>

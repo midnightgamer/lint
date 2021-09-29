@@ -1,0 +1,70 @@
+<div class="overlay"></div>
+<div class="file-container">
+  <div class="title">
+    <h1>File explorer view</h1>
+    <img (click)="closePopup()" src="./../../../assets/close.svg"/>
+  </div>
+  <div class="date-range">
+    <span>Date range</span>
+    <p>15/06/2021 - 02/07/2021</p>
+  </div>
+  <ul class="desktop">
+    <li>
+      <span class="nothing"></span>
+      <span class="item">Resource item</span>
+      <span class="file">File name</span>
+      <span class="date">Date modified/uploaded</span>
+      <span class="hover"></span>
+    </li>
+    <li *ngFor="let item of files">
+      <p>
+
+      </p>
+      <p>
+        <img src="assets/file-xls.svg">
+        <span>{{item.resource_name}}</span>
+      </p>
+      <p>
+        <span>{{item.file_name}}</span>
+      </p>
+      <p>
+        <span>{{item.date}}</span>
+      </p>
+      <p class="links">
+        <span class="api" (click)="openAPIPopup()">
+          <img src="assets/api.svg">
+        </span>
+        <span class="download">
+          <img src="assets/download-blue.svg">
+        </span>
+      </p>
+    </li>
+  </ul>
+  <ul class="mobile">
+    <li *ngFor="let item of files">
+      <p>
+        <b>Resource item</b>
+        <span>
+           <img src="assets/file-xls.svg">
+        <span>{{item.resource_name}}</span>
+        </span>
+      </p>
+      <p>
+        <b>File name</b>
+        <span>{{item.file_name}}</span>
+      </p>
+      <p>
+        <b>Date modified/uploaded</b>
+        <span>{{item.date}}</span>
+      </p>
+      <p class="links">
+        <span class="api" (click)="openAPIPopup()">
+          <img src="assets/api.svg">
+        </span>
+        <span class="download">
+          <img src="assets/download-blue.svg">
+        </span>
+      </p>
+    </li>
+  </ul>
+</div>

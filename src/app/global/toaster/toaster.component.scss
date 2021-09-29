@@ -1,0 +1,30 @@
+.toaster {
+  position: fixed;
+  padding: 15px;
+  color: var(--white);
+  top: 15px;
+  border-radius: 5px;
+  font-weight: normal;
+  font-size: 14px;
+  left: 50%;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 300px;
+  img{
+    margin: 0 10px 0 0;
+  }
+  &.success {
+    background: #D8F3DC;
+    color: #1D8006;
+    border: 1px solid #1D8006;
+  }
+
+  &.error {
+    background: #FFF0F3;
+    color: #BD0505;
+    border: 1px solid #BD0505;
+  }
+}

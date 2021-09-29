@@ -1,0 +1,156 @@
+.desc-container {
+  h1 {
+    color: var(--black);
+    font-size: 32px;
+    font-weight: 600;
+    margin-bottom: 10px;
+  }
+
+  p {
+    font-size: 16px;
+    color: var(--black);
+    margin-bottom: 20px;
+  }
+
+  .info-container {
+    display: flex;
+
+    .info {
+      display: flex;
+      margin-right: 25px;
+      align-items: center;
+      text-transform: capitalize;
+
+      img {
+        margin-right: 7px;
+      }
+    }
+  }
+
+  h3 {
+    margin-top: 35px;
+    margin-bottom: 5px;
+  }
+
+  .flex {
+    &.link-holder {
+      flex-wrap: wrap;
+      // width: 80%;
+      div {
+        margin: 20px 20px 0 0;
+        width: calc((100% - 60px) / 3);
+      }
+    }
+
+    display: flex;
+    align-items: center;
+
+    > a {
+      background: var(--blue);
+      border-radius: 4px;
+      padding: 12px 34px;
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    div {
+      margin: 30px 0 0;
+
+      &:not(:last-of-type) {
+        margin-right: 30px;
+      }
+
+      img {
+        margin-right: 7px;
+      }
+
+      a {
+        color: var(--black);
+      }
+
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .schema-container {
+    display: block;
+    margin-bottom: 40px;
+    color: var(--blue);
+    text-decoration: underline;
+  }
+
+  .pub-container {
+    img {
+      margin-right: 12px;
+      width: 36px;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .desc-container {
+    h1 {
+      font-size: 22px;
+    }
+
+    p {
+      margin: 15px 0;
+    }
+
+    .info-container {
+      flex-wrap: wrap;
+
+      .info {
+        font-size: 13px;
+        margin-bottom: 0;
+        margin-right: 25px;
+        margin-bottom: 18px;
+      }
+    }
+
+    h3 {
+      margin-top: 30px;
+    }
+
+    .flex {
+      display: block;
+      flex-wrap: wrap;
+      flex-direction: column;
+      &.link-holder {
+        width: 100%;
+        div {
+          margin: 20px 0 0 0;
+         width: 100%;
+        }
+      }
+      > a {
+        width: 55%;
+        display: block;
+        padding: 12px 30px;
+        font-size: 13px;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      div {
+        display: inline-block;
+        margin: 0 0 10px;
+      }
+
+    }
+
+    .pub-container,
+    .schema-container {
+      font-size: 15px;
+    }
+
+    .pub-container {
+      img {
+        vertical-align: middle;
+        width: 50px;
+      }
+    }
+  }
+}

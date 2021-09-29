@@ -1,0 +1,20 @@
+<section class="cities">
+  <div class="container">
+    <div class="section-title">
+      <div class="title">
+        <h2>
+          Discover by cities
+        </h2>
+        <p>
+          Search and find datasets by city and region
+        </p>
+      </div>
+    </div>
+    <ul>
+      <li (click)="setCity(item)" *ngFor="let item of cities" >
+        <img src="{{item.cover}}" >
+        <h3>{{item.name}}</h3>
+      </li>
+    </ul>
+  </div>
+</section>

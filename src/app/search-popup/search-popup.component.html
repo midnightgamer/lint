@@ -1,0 +1,27 @@
+<div class="search-container">
+  <img (click)="closePopup()" class='close'
+       src="/assets/close-black.svg" />
+  <div class="searchBox">
+    <div class="search" id="header-search">
+      <img src="./assets/search.svg" />
+      <input autofocus type="text" (ngModelChange)="handleSearchInput($event)"
+             placeholder="Search or type" autocomplete="off"
+             [(ngModel)]="query"/>
+      <ul *ngIf="query !== '' && searched.length >
+                    0">
+        <li *ngFor="let item of searched"
+            (click)="selectSearchItem(item)">
+          <img [src]="item.icon" >
+          <span [innerHTML]="item.boldLabel"></span>
+        </li>
+      </ul>
+      <ul class="dataset-dropdown" *ngIf="query !== '' && searched.length ===
+         0 && showNoMatch">
+        <li>
+          No matching result found
+        </li>
+      </ul>
+    </div>
+    <p>Hit ESC to close</p>
+  </div>
+</div>

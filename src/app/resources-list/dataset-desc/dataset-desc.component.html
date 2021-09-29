@@ -1,0 +1,63 @@
+<div class="desc-container">
+  <h1>{{dataset.label}}</h1>
+  <p>
+    {{dataset.description}}
+  </p>
+  <ul class="info-container">
+    <div class="info">
+      <app-access-tags
+        [type]="dataset.accessPolicy === 'OPEN' ? 'public' : (dataset.accessPolicy === 'SECURE' ? 'private' : 'mixed')"></app-access-tags>
+    </div>
+    <div class="info">
+      <img src="./../../../assets/location.svg"/>{{dataset.instance}}
+    </div>
+    <!-- <div class="info"><img src="./../../../assets/eye.svg" />{{dataset.views}}</div> -->
+    <div class="info"><img
+      src="./../../../assets/bracket.svg"/>{{dataset.resources}} resources</div>
+    <div class="info" *ngIf="dataset.dataSampleFile">
+      <img [src]="getIconForSampleFile(dataset.dataSampleFile)"/>{{getTextForSampleFile(dataset.dataSampleFile)}}
+    </div>
+  </ul>
+  <h3>Publisher</h3>
+  <div class="pub-container flex">
+    <img [src]="dataset.icon"/>
+    {{dataset.provider.description}}
+  </div>
+  <h3>Schema</h3>
+  <a [href]="dataset.schema" target="_blank"
+     class="schema-container">{{dataset.schema}}</a>
+  <div class="flex" *ngIf="dataset.accessPolicy === 'SECURE'">
+    <a (click)="openRequestAccess($event)">Request dataset</a>
+  </div>
+  <div class="flex link-holder">
+    <div *ngIf="dataset.dataSampleFile">
+      <img src="assets/download.svg"/>
+      <a [href]="dataset.dataSampleFile" target="_blank">Download sample data</a>
+    </div>
+    <div *ngIf="dataset.dataSample">
+      <img src="./../../../assets/eye.svg"/>
+      <a (click)="openSampleData(dataset.dataSample); $event.stopPropagation()">View sample data</a>
+    </div>
+    <!-- <div (click)="openViewData()">
+      <img src="./../../../assets/eye.svg"/>
+      <span>View data</span>
+    </div> -->
+    <!-- <div (click)="openSubscriberData()">
+      <img src="./../../../assets/mail.svg"/>
+      <span>Subscribe</span>
+    </div> -->
+    <div (click)="copy()">
+      <img src="assets/copy-dark.svg"/>
+      <span>Copy dataset ID</span>
+    </div>
+  </div>
+</div>
+<app-view-data
+  *ngIf="popup_status && popup_type == 'view-data'"
+></app-view-data>
+<app-subscriber
+  *ngIf="popup_status && popup_type == 'subscriber-data'"
+></app-subscriber>
+<app-request-access-popup *ngIf="popup_status && popup_type ==
+'request-access'"
+></app-request-access-popup>

@@ -1,0 +1,90 @@
+<div class="menu-container">
+  <img (click)="closePopup()" class='close'
+       src="./../../../assets/close-black.svg"/>
+  <div class="col-left">
+    <div class="links-container">
+      <ul class="links-primary">
+        <li><a href="" (click)="closePopup()">Become a publisher</a></li>
+        <li><a (click)="doSearch()">Browse datasets</a></li>
+        <li><a routerLink="/domains" (click)="closePopup()">Discover domains</a>
+        </li>
+        <li><a routerLink="/instances" (click)="closePopup()">Explore
+          cities</a></li>
+        <li (click)="toggleDevsLinks($event);"
+            class='documentation'>Developers
+          <img *ngIf='!showDevsLinks' src="./../../../assets/arrow-down.svg"
+               class="logo"/>
+          <img *ngIf='showDevsLinks' src="./../../../assets/arrow-up.svg"
+               class="logo"/>
+          <ul *ngIf='showDevsLinks'>
+            <li class="submenu"
+                (click)=" $event.stopPropagation()"><a
+              href="https://api.catalogue.iudx.org.in/apis"
+              target="_blank"
+            >Catalogue API Docs</a></li>
+            <li class="submenu"
+                (click)=" $event.stopPropagation()"><a
+              href="https://rs.iudx.org.in/apis" target="_blank">Resource Server
+              API
+              Docs</a></li>
+            <li class="submenu"
+                (click)=" $event.stopPropagation()"><a
+              href="https://authdocs.iudx.org.in/" target="_blank">Auth Server
+              API
+              Docs</a></li>
+          </ul>
+        </li>
+        <li (click)="toggleDocsLinks($event);"
+            class='documentation'>Documents
+          <img *ngIf='!showDocsLinks' src="./../../../assets/arrow-down.svg"
+               class="logo"/>
+          <img *ngIf='showDocsLinks' src="./../../../assets/arrow-up.svg"
+               class="logo"/>
+          <ul *ngIf='showDocsLinks'>
+            <li class="submenu"
+                (click)=" $event.stopPropagation()"><a
+              href="https://github.com/datakaveri/iudx-readme"
+              target="_blank"
+            >
+              Getting Started
+            </a></li>
+            <li class="submenu"
+                (click)=" $event.stopPropagation()"><a
+              href="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/documents/unified_document_architecture.pdf"
+              target="_blank">
+              Unified Data Exchange Architecture</a></li>
+          </ul>
+        </li>
+      </ul>
+      <ul class="links-secondary">
+        <li><a (click)="closePopup()" href="https://iudx.org.in/"
+               target="_blank">About IUDX</a></li>
+        <li><a (click)="closePopup()" href="">Login / Register</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-right">
+    <div class="about-container">
+        <span>Complementary datasets for innovative solutions
+            <img class="info" src="/assets/infonew.svg"/>
+            <p class="info-text">
+              Application developers may find these non IUDX data sets useful
+              while developing innovate applications and solutions. The
+              discovery and data access mechanisms are different from IUDX and
+              the user need to follow the mechanisms specified by the
+              provider of these datasets.
+            </p>
+        </span>
+      <a href="https://apisetu.gov.in/" target="_blank">
+        <img src="assets/api_setu.png">
+      </a>
+      <hr>
+      <a>Want to talk?</a>
+      <a href="mailto:info@iudx.org.in">
+        <p class='email'>
+          info@iudx.org.in
+        </p>
+      </a>
+    </div>
+  </div>
+</div>

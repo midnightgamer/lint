@@ -1,0 +1,209 @@
+:root {
+  --white: #FFFFFF;
+  --black: #2C2C2C;
+  --grey: #6C6C6C;
+  --red: #FF6B6B;
+  --yellow: #C77D00;
+  --green: #17C3B2;
+  --light-green: #009e5f;
+  --blue: #0B457F;
+  --light-blue: #0AABB4;
+  --cyan: #208496;
+  --border: #DADADA;
+  --off-white: #FCFCFC;
+  --background: #F2F2F2;
+  --light-background: #f8f8f8;
+  --font-normal: 400;
+  --font-bold: 500;
+  --font-extra-bold: 600;
+  --header-height: 90px;
+  --break-tab: 900px;
+  --break-mob: 500px;
+}
+
+* {
+  font-family: 'Epilogue', sans-serif;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: var(--black);
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+html, body {
+  background-color: var(--white);
+}
+
+a, button {
+  cursor: pointer;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/*DATASET CARD*/
+app-dataset-card {
+  width: calc((100% - 50px) / 3);
+  min-height: 235px;
+  margin: 0 0 25px 0;
+}
+
+@media (max-width: 900px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  app-dataset-card {
+    width: calc((100% - 15px) / 2);
+    max-width: 370px;
+    margin: 0 0 25px 0;
+
+  }
+}
+
+@media (max-width: 500px) {
+  app-dataset-card {
+    width: 100%;
+    max-width: unset;
+    margin: 0 0 15px 0;
+
+  }
+}
+
+/*Global Typo*/
+h2 {
+  font-weight: 600;
+}
+
+.section-title {
+  display: flex;
+  margin: 0 0 25px;
+  align-items: baseline;
+
+  h2,
+  h2 span {
+    font-weight: 600;
+    margin: 0 25px 0 0;
+    font-size: 28px;
+    line-height: 1;
+
+    span {
+      span {
+        text-transform: capitalize;
+      }
+    }
+
+  }
+
+  .view-all {
+    color: var(--blue);
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 0 0 auto;
+
+    img {
+      margin: 0 0 0 5px;
+    }
+  }
+
+}
+
+button {
+  outline: none;
+  border: none;
+  box-sizing: border-box;
+
+  &.btn {
+    background: var(--blue);
+    color: var(--white);
+    padding: 20px 65px;
+    border: 1px solid var(--blue);
+    border-radius: 5px;
+  }
+
+  &.ghost {
+    border: 1px solid var(--white);
+    color: var(--white);
+    background: transparent;
+
+  }
+}
+
+.popupCustom .leaflet-popup-tip,
+.popupCustom .leaflet-popup-content-wrapper {
+  border-radius: 5px;
+
+  img {
+    width: 25px;
+    height: 25px;
+    display: block;
+    margin: 0 10px 0 0;
+  }
+
+  span {
+    font-size: 14px;
+    display: block;
+  }
+
+  .with-image {
+    display: flex;
+    align-items: flex-start;
+
+    margin: 0 0 5px 0;
+
+    span {
+      font-weight: 600;
+    }
+  }
+
+  .resource {
+    margin: 0 0 5px 35px;
+    color: var(--grey);
+    font-weight: 600;
+
+    &.dataset {
+      b{
+        color: var(--grey);
+      }
+    }
+
+    b {
+      font-size: 14px;
+    }
+  }
+
+  .anchor {
+    font-weight: 700;
+    color: var(--blue);
+    cursor: pointer;
+  }
+}
+.leaflet-bottom{
+  display: none;
+}

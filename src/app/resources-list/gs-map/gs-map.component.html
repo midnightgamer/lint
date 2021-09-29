@@ -1,0 +1,13 @@
+<div class="overlay"></div>
+<div class="map-container">
+  <div class="title">
+    <h1>Map view , {{title}}</h1>
+    <img (click)="closePopup()" src="/assets/close.svg"/>
+  </div>
+  <div class="map">
+    <div leaflet (leafletMapReady)="on_map_ready($event)"
+         [leafletOptions]="leaflet_options"
+         id="gs-map"></div>
+  </div>
+
+</div>

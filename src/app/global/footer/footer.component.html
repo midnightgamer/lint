@@ -1,0 +1,53 @@
+<footer>
+  <div class="container">
+    <div class="col-1">
+      <a routerLink="/">
+        <img src="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/iudx.png"  class="logo"/>
+      </a>
+      <div class="place">
+        <a href="https://goo.gl/maps/MyKzgG2gzK1JsENz7" target="_blank">
+          <img src="/assets/location.png" style="margin-bottom: 0px !important;"/>
+          <span>
+            Indian Institute of Science, Entrepreneurship Centre, Ground Floor,
+            Bengaluru, Karnataka 560019
+          </span>
+        </a>
+      </div>
+    </div>
+    <!--<div class="col-2">
+      <h3>Quick Links</h3>
+      <div class="links-container">
+        <div class="col-left">
+          <ul>
+            <li><a href="#">Become a publisher</a></li>
+            <li><a href="#">Documentation</a></li>
+            <li><a href="#">Blog</a></li>
+            <li><a href="#">Register</a></li>
+          </ul>
+        </div>
+        <div class="col-right">
+          <ul>
+            <li><a href="">Support</a></li>
+            <li><a href="">FAQ</a></li>
+            <li><a href="https://iudx.org.in/" target="_blank">About IUDX</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>-->
+    <div class="col-3">
+      <div class="flex-parent">
+        <img *ngIf="city" class='cityLogo'
+             [src]="city.logo"/>
+        <a href="https://smartcities.gov.in/" target="_blank">
+          <img class='smart-city-logo' src="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/smart-city.png"/>
+        </a>
+        <a href="http://mohua.gov.in/" target="_blank">
+          <img class='ministry-logo' src="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/mohua.png"/>
+        </a>
+        <a href="https://www.iisc.ac.in/" target="_blank">
+          <img class='iisc-logo' src="https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/iisc.png"/>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,21 @@
+<section class="usps">
+  <div class="container">
+    <h2>
+      Data-Model Domains
+    </h2>
+    <div class="usps-cards-container">
+      <div class="card" *ngFor="let domain of domains" (click)="goToDatasets(domain)">
+        <div class="icon">
+          <img [src]="domain.icon" [alt]="domain.name">
+        </div>
+        <div>
+          <h3>{{domain.name}}</h3>
+          <p>
+            {{domain.description}}
+          </p>
+          <a (click)="goToDatasets(domain)">View Datasets</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

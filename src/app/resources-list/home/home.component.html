@@ -1,0 +1,41 @@
+<!-- Dataset Description section -->
+<div class="resource">
+  <div class="container flex-container">
+    <div class="description-container">
+      <app-dataset-desc [dataset]="dataset_details.dataset"></app-dataset-desc>
+    </div>
+
+    <div class="map-container" [class]="dataset_details.dataset.dataDescriptor?'':'hide'">
+      <app-resources-map [datasets]="dataset_details.dataset" *ngIf="is_loaded"
+      ></app-resources-map>
+    </div>
+  </div>
+</div>
+
+<!-- Resources List section-->
+<div class="resource">
+  <div class="container flex-container">
+    <div class="resources-container">
+      <app-resources [resources]="dataset_details.resources"
+                     [dataset]="dataset_details.dataset"></app-resources>
+    </div>
+    <div class="descriptor-container">
+      <app-data-descriptor
+        [dataDescriptor]="dataset_details.dataset?.dataDescriptor"
+      ></app-data-descriptor>
+    </div>
+  </div>
+</div>
+
+<app-gs-map *ngIf="popup_status &&
+popup_type == 'gs-map'"></app-gs-map>
+<app-files-popup *ngIf="popup_status && popup_type == 'files'"
+></app-files-popup>
+<app-api-link-popup
+  *ngIf="popup_status && popup_type == 'api'"></app-api-link-popup>
+<app-sample-data
+  *ngIf="popup_status && popup_type == 'sample-popup'"></app-sample-data>
+<app-latest-data
+  *ngIf="popup_status && popup_type == 'latest-data'"></app-latest-data>
+
+

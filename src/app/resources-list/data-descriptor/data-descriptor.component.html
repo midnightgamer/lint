@@ -1,0 +1,44 @@
+<div class="section-dataDescriptor" *ngIf="dataDescriptor">
+  <div class="container">
+    <h1>Data descriptors</h1>
+    <div class="descriptors-container">
+      <div class="descriptor-box" *ngFor="let resource of data_descriptor; let i = index;">
+        <h3 class="descriptor" (click)="toggle(i)"> {{ resource[0].value }}
+          <img src="assets/minus.svg" *ngIf="flags[i]">
+          <img src="assets/plus.svg" *ngIf="!flags[i]">
+        </h3>
+        <div class="descriptor-child" *ngIf="flags[i]">
+          <div *ngFor="let key of resource;let j=index;">
+            <div *ngIf="j != 0 && typeOf(key.value) != 'object'">
+              <p>
+                {{key.key}}: <span> {{key.value}}</span>
+              </p>
+            </div>
+            <div *ngIf="j != 0 && typeOf(key.value) == 'object'">
+              <p>
+                {{key.key}}:
+              </p>
+              <div *ngFor="let item of key.value;let k=index;" class="level_2">
+                <div *ngIf="k != 0 && typeOf(item.value) != 'object'">
+                  <p>
+                    {{item.key}}: <span> {{item.value}}</span>
+                  </p>
+                </div>
+                <div *ngIf="k != 0 && typeOf(item.value) == 'object'">
+                  <p>
+                    <span>{{item.key}}: </span>
+                  </p>
+                  <div *ngFor="let data of item.value" class="level_3">
+                    <p>
+                      <span>{{data.key}}: </span> {{data.value}}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

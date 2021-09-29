@@ -1,0 +1,5 @@
+<div class="toaster" [class]="props.type">
+  <img [src]="props.type === 'success'?'assets/success.svg':'assets/error.svg'"
+  >
+  {{props.message}}
+</div>

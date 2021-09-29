@@ -1,0 +1,129 @@
+<div class="landing-page">
+  <div class="banner">
+    <div class="container">
+      <div *ngIf="city" class="city-img">
+        <img src="{{city.logo}}" >
+      </div>
+      <div *ngIf="!city" class="landing-banner-eclipse">
+      </div>
+      <div class="img">
+        <img
+          [src]="!city?'https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/instances/covers/all-instances.jpg': city?.cover"
+          class="banner-img">
+      </div>
+      <div *ngIf="city">
+        <h2>
+          Explore Datasets in <br/>
+          <span>{{city.name}}</span>
+        </h2>
+        <p>
+          Streamlined collection of smart city data for a better experience.
+        </p>
+      </div>
+      <div *ngIf="!city">
+        <h2>
+          Streamlined collection of smart city data for a better experience.
+        </h2>
+        <p>
+          Explore datasets relevant to your region.
+        </p>
+      </div>
+      <div class="dataset-search-container" [ngClass]="!city?'no-city':''">
+        <ul class="dataset-dropdown" *ngIf="query !== '' && searched.length >
+         0">
+          <li *ngFor="let item of searched" (click)="selectSearchItem(item)">
+            <img [src]="item.icon" >
+            <span [innerHTML]="item.boldLabel"></span>
+          </li>
+        </ul>
+        <ul class="dataset-dropdown" *ngIf="query !== '' && searched.length ===
+         0 && showNoMatch">
+          <li>
+            No matching result found
+          </li>
+        </ul>
+        <div class="dataset-search" id="landing-search">
+          <img src="./assets/search.svg" />
+          <input [(ngModel)]="query" (ngModelChange)="handleSearchInput($event)"
+                 type="text"
+                 placeholder="Search for dataset">
+        </div>
+        <div  class="search" (click)="doSearch()">
+          <span>Search</span>
+          <img src="./assets/next.svg" >
+        </div>
+
+      </div>
+      <a *ngIf="city" class="geo-query-btn" routerLink="/geoquery">
+        Geo Query
+      </a>
+      <ul class="stats">
+        <li>
+          <a routerLink="/datasets">
+            <img src="./assets/datasets.svg" >
+            <div>
+              <span class="count">{{summary.summary.datasets}}</span>
+              <span>Datasets</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/domains">
+            <img src="./assets/domains.svg" >
+            <div>
+              <span class="count">{{domains.length}}</span>
+              <span>Domains</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <a routerLink="/instances">
+            <img src="./assets/cities.svg" >
+            <div>
+              <span class="count">{{cities.length}}</span>
+              <span>Cities</span>
+            </div>
+          </a>
+        </li>
+        <li>
+          <img src="./assets/providers.svg" >
+          <div>
+            <span class="count">{{summary.summary.providers}}</span>
+            <span>Publishers</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!-- domains section -->
+
+  <app-domains *ngIf="!city" [domains]="domains"></app-domains>
+  <!-- cities section -->
+  <app-cities [cityList]="cityList" *ngIf="!city"></app-cities>
+
+  <!-- datsets section card -->
+
+  <app-datasets [city]="city" [datasets]="summary.featured_datasets" [summary]="summary.summary"></app-datasets>
+
+
+  <!-- recently added datasets card section -->
+
+  <app-recent-datasets [city]="city" [datasets]="summary.latest_datasets" [summary]="summary.summary"></app-recent-datasets>
+
+  <!-- usps section -->
+
+  <app-usps></app-usps>
+
+  <!-- testimonials section -->
+
+<!--  <app-testimonials></app-testimonials>-->
+
+  <!-- provider section -->
+
+  <app-provider></app-provider>
+
+  <!-- knowledge hub section -->
+
+<!--  <app-knowledge-hub></app-knowledge-hub>-->
+
+</div>

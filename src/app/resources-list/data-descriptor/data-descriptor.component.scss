@@ -1,0 +1,75 @@
+h1 {
+  font-size: 24px;
+  margin-bottom: 25px;
+}
+
+.descriptor-box {
+  margin-bottom: 15px;
+  background: #f8f8f8;
+}
+
+.descriptor {
+  padding: 20px;
+  font-weight: 500;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  text-transform: capitalize;
+  img {
+    width: 15px;
+    float: right;
+  }
+}
+
+.descriptor-child {
+  padding: 20px;
+  p{
+    color:var(--grey);
+    padding: 5px 5px;
+    
+    span{
+        color:var(--black);
+        padding-right: 5px ;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  .section-dataDescriptor {
+    padding-top: 45px;
+    border-top: 1px solid #c2c2c2;
+    width: 100%;
+
+    .container {
+      padding: 0;
+    }
+
+    h1 {
+      font-size: 17px;
+    }
+
+    h3 {
+      font-size: 13px;
+    }
+
+    .descriptor-child {
+      font-size:13px;
+    }
+
+    .descriptor{
+      h3{
+        img{
+          width:11px;
+        }
+      }
+    }
+
+  }
+}
+
+.level_2 {
+  margin-left: 30px;
+}
+.level_3 {
+  margin-left: 60px;
+}
