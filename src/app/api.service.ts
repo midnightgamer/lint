@@ -121,7 +121,7 @@ export class ApiService {
     let isTokenNeeded = false;
     if (token) {
       let valid: any = await this.check_valid_token(token);
-      if (!valid || !valid.results || !valid.results.type || valid.results.type.indexOf('Success') == -1) {
+      if (!valid || !valid.type  || valid.type.indexOf('Success') == -1) {
         isTokenNeeded = true;
       }
     } else {
