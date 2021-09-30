@@ -33,7 +33,7 @@ export class SearchPopupComponent implements OnInit {
   handleSearchInput(event: string): void {
     this.showNoMatch = true;
     event = event.toLowerCase();
-    const results = this.dummyDatasetSearch.filter((item: any) => item.label.toLowerCase().includes(event))
+    const results = this.dummyDatasetSearch.filter((item: any) => item.label && item.label.toLowerCase().includes(event))
     if (results) {
       this.searched = results.map((item: any) => ({
         ...item,

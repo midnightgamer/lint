@@ -70,7 +70,7 @@ export class AppComponent {
   async analyse_cities() {
     let whitelist_urls = ['localhost:4000','catalogue'];
     let origin = location.host.split('.')[0];
-    let host = whitelist_urls.includes(origin) ? 'pune' : origin;
+    let host = whitelist_urls.includes(origin) ? '' : origin;
     this.global.set_active_city(host);
     let instances  = await this.api.get_cities();
     this.global.set_cities(instances);
