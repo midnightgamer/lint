@@ -102,6 +102,8 @@ export class ApiService {
   }
 
   async get_latest_data(id: any, type: string) {
+    let isToken = await this.get_res_public_token();
+    if (!isToken) return { 'type': 'ERROR', 'message': 'Not Authorized Consumer'};
     let data: any = await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res', type);
     return data;
   }
@@ -115,12 +117,30 @@ export class ApiService {
   }
 
   async get_res_public_token() {
-    let post_body = {
-      "itemId": environment.res_public_token_url,
-      "itemType": "resource_server",
-      "role": "consumer"
-    };
-    return await this.network.post_api(environment.auth_url + "auth/v1/token", post_body, 'auth');
+    let token = this.global.get_res_token('public');
+    let isTokenNeeded = false;
+    if (token) {
+      let valid: any = await this.check_valid_token(token);
+      if (!valid || !valid.results || !valid.results.type || valid.results.type.indexOf('Success') == -1) {
+        isTokenNeeded = true;
+      }
+    } else {
+      isTokenNeeded = true;
+    }
+
+    if (isTokenNeeded) {
+      let post_body = {
+        "itemId": environment.res_public_token_url,
+        "itemType": "resource_server",
+        "role": "consumer"
+      };
+      let token_resp: any = await this.network.post_api(environment.auth_url + "auth/v1/token", post_body, 'auth');
+      if (token_resp && token_resp.results && token_resp.results.accessToken)
+        this.global.set_res_token('public', token_resp.results.accessToken);
+      else
+        return false;
+    }
+    return true;
   }
 
   async check_valid_token(token: any) {

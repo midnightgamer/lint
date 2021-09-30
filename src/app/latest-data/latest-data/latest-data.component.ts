@@ -24,7 +24,12 @@ export class LatestDataComponent implements OnInit {
 
   async get_latest_data() {
     let data: any = await this.api.get_latest_data(this.resource_id, 'public');
-    this.latest_data = JSON.stringify(data?.results, null, 4);
+    if (data.type == "ERROR") {
+      this.global.set_popup(false, 'latest-data');
+      this.global.set_popup(true, 'login-popup');
+    } else {
+      this.latest_data = JSON.stringify(data?.results, null, 4);
+    }
   }
 
 }

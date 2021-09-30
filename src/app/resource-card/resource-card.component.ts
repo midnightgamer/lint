@@ -32,8 +32,8 @@ export class ResourceCardComponent implements OnInit {
   }
 
   openGsMap(resource: any): void {
-    // this.global.set_single_resource(resource)
-    // this.global.set_popup(true, 'gs-map');
+    this.global.set_single_resource(resource)
+    this.global.set_popup(true, 'gs-map');
   }
 
   openFilesPopup(): void {
@@ -45,8 +45,8 @@ export class ResourceCardComponent implements OnInit {
   }
 
   openLatestData(id: string): void {
-    // this.global.set_temp_data(id);
-    // this.global.set_popup(true, 'latest-data');
+    this.global.set_temp_data(id);
+    this.global.set_popup(true, 'latest-data');
   }
 
   openSampleData(data: any) {
