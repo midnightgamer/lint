@@ -13,7 +13,7 @@
     </div>
   </div>
   <div class="filters">
-    <div class="filter"  *ngFor="let dataset of datasets" (click)="toggle_dataset(dataset)" title="{{ dataset.label }}">
+    <div class="filter"  *ngFor="let dataset of searched" (click)="toggle_dataset(dataset)" title="{{ dataset.label }}">
       <img
         [src]="checkdataset(dataset)?'/assets/checked.svg':'/assets/unchecked.svg'">
       <span>{{dataset.label}}</span>

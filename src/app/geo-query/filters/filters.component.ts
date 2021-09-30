@@ -17,6 +17,7 @@ export class FiltersComponent implements OnInit {
   constructor(private global: GlobalService) {
     this.datasets = this.global.get_datasets();
     this.filters = this.global.get_dataset_filters();
+    this.searched = this.datasets;
   }
 
   ngOnInit(): void {
@@ -55,11 +56,8 @@ export class FiltersComponent implements OnInit {
   }
   handleSearchInput(event: any): void {
     event = event.toLowerCase();
-    const results = this.filter.filter((item: any) => {
-      let val = item;
-      if (this.type === 'domains') val = val.name;
-      else if (this.type === 'providers') val = val.description;
-      return val.toLowerCase().includes(event);
+    const results = this.datasets.filter((item: any) => {
+      return item.label && item.label.toLowerCase().includes(event);
     });
     if (results) {
       this.searched = results;
