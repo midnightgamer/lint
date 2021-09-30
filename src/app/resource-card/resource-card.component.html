@@ -30,6 +30,10 @@
         <img src="./../../../assets/map.svg"/>
         <span (click)="openGsMap(resource)">Map view</span>
       </div>
+      <div (click)="copy()" class="col col-left">
+        <img src="assets/copy-dark.svg"/>
+        <span>Copy resource ID</span>
+      </div>
       <div class="col col-left" (click)="toggleDataDescriptors()"
            *ngIf="resource.dataDescriptor"
            class="flex toggler">
