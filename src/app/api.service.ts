@@ -102,15 +102,15 @@ export class ApiService {
   }
 
   async get_latest_data(id: any) {
-    return await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id);
+    return await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res');
   }
 
   async get_resource_map_data(id: any) {
-    return await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities?id=' + id + '&q=id==' + id);
+    return await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities?id=' + id + '&q=id==' + id, 'res');
   }
 
   async get_user_profile() {
-    return await this.network.get_api(environment.auth_url + 'auth/v1/user/profile', true);
+    return await this.network.get_api(environment.auth_url + 'auth/v1/user/profile', 'auth');
   }
 
 }

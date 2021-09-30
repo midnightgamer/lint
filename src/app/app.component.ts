@@ -4,7 +4,6 @@ import { ApiService } from './api.service';
 import { GlobalService } from './global.service';
 import { KeycloakService } from 'keycloak-angular';
 import { get_keycloak } from './keycloak.init';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -42,17 +41,21 @@ export class AppComponent {
   }
 
   async initialize() {
-    // analyse user profile
-    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1] && document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'true') {
+    await this.analyse_user_login();
+    await this.analyse_cities();
+    this.is_loaded = true;
+  }
+
+  async analyse_user_login() {
+    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1] && document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') {
       if(document.cookie && document.cookie.split('iudx-ui-cat=')[1]){
         let token = document.cookie.split('iudx-ui-cat=')[1].split(';')[0];
-        this.global.set_token(token);
-        await this.analyse_profile(token);
+        await this.analyse_user_profile(token);
       } else {
         this.keycloak.isLoggedIn().then(async result => {
           if(result) {
             let token: any = await this.keycloak.getToken();
-            await this.analyse_profile("Bearer " + token);
+            await this.analyse_user_profile("Bearer " + token);
           } else {
             this.keycloak.login({
               redirectUri: window.location.origin
@@ -65,7 +68,10 @@ export class AppComponent {
         this.listen_cookie();
       },100);
     }
-    // analyse cities
+    return true;
+  }
+
+  async analyse_cities() {
     let whitelist_urls = ['localhost:4000','catalogue'];
     let origin = location.host.split('.')[0];
     let host = whitelist_urls.includes(origin) ? '' : origin;
@@ -82,31 +88,20 @@ export class AppComponent {
     } else {
       this.title.setTitle("IUDX | India Urban Data Exchange");
     }
-    this.is_loaded = true;
+    return true;
   }
 
-  async analyse_profile(token: any) {
-    try {
-      let response: any = await this.api.get_user_profile();
-      let profile_completion = response.type.split(':')[3] =='Success'? true : false;
-      if(!profile_completion) {
-        window.open(environment.sso_url + '?login=auto','_blank');
-        this.global.set_toaster('error', 'Profile completion is pending.');
-      } else {
-        document.cookie = "iudx-ui-cat=" + token + ";";
-        this.global.set_token(token);
-        this.global.set_user_profile(response.results);
-      }
-    } catch(e) {
-      window.open(environment.sso_url + '?login=auto','_blank');
-      this.global.set_toaster('error', 'Profile completion is pending.');
-    }
+  async analyse_user_profile(token: any) {
+    document.cookie = "iudx-ui-cat=" + token + ";max-age=10000000;";
+    this.global.set_token(token);
+    let response: any = await this.api.get_user_profile();
+    this.global.set_user_profile(response.results);
     return true;
   }
 
   listen_cookie() {
     if(document.cookie && document.cookie.split('iudx-ui-sso=')[1]) {
-      this.initialize();
+      if(document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') this.initialize();
     }
   }
 

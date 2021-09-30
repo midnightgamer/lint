@@ -17,19 +17,22 @@ export class NetworkService {
     this.url = environment.mlayer_url;
   }
 
-  get_headers(isAuth: any) {
+  get_headers(auth: any) {
     let headers: any = {};
     let token = this.global.get_token();
-    if(isAuth && token) {
+    if(auth == 'auth' && token) {
       headers["Authorization"] = this.global.get_token();
+    }
+    if(auth == 'res' && token) {
+      headers["token"] = this.global.get_token();
     }
     return headers;
   }
 
-  get_api(url: string, isAuth?: boolean) {
+  get_api(url: string, auth?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.get(this.get_url(url), { headers: new HttpHeaders(this.get_headers(isAuth)) }).subscribe(async (data: any) => {
+      this.http.get(this.get_url(url), { headers: new HttpHeaders(this.get_headers(auth)) }).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
@@ -42,10 +45,10 @@ export class NetworkService {
     });
   }
 
-  post_api(url: string, post_body: object, isAuth?: boolean) {
+  post_api(url: string, post_body: object, auth?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.post(this.get_url(url), post_body, { headers: new HttpHeaders(this.get_headers(isAuth)) }).subscribe(async (data: any) => {
+      this.http.post(this.get_url(url), post_body, { headers: new HttpHeaders(this.get_headers(auth)) }).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
@@ -58,10 +61,10 @@ export class NetworkService {
     });
   }
 
-  put_api(url: string, put_body: object, isAuth?: boolean) {
+  put_api(url: string, put_body: object, auth?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.put(this.get_url(url), put_body, { headers: new HttpHeaders(this.get_headers(isAuth)) }).subscribe(async (data: any) => {
+      this.http.put(this.get_url(url), put_body, { headers: new HttpHeaders(this.get_headers(auth)) }).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
@@ -74,10 +77,10 @@ export class NetworkService {
     });
   }
 
-  delete_api(url: string, isAuth?: boolean) {
+  delete_api(url: string, auth?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.delete(this.get_url(url), { headers: new HttpHeaders(this.get_headers(isAuth)) }).subscribe(async (data: any) => {
+      this.http.delete(this.get_url(url), { headers: new HttpHeaders(this.get_headers(auth)) }).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
@@ -99,10 +102,10 @@ export class NetworkService {
   }
 
   unauthorizedErrorAlert() {
-    document.cookie = "iudx-ui-cat=false;max-age=0";
-    document.cookie = "iudx-ui-sso=false;max-age=0;domain=" + environment.parent_domain;
-    this.keycloak.logout();
-    this.global.set_toaster('error','You have been logged out. Please login again.');
+    // document.cookie = "iudx-ui-cat=logged-out;max-age=0";
+    // document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
+    // this.keycloak.logout();
+    // this.global.set_toaster('error','You have been logged out. Please login again.');
   }
 
   get_url(url: any) {

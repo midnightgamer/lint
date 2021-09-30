@@ -48,9 +48,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout(event: Event): void {
     event.stopPropagation();
-    document.cookie = "iudx-ui-cat=false;max-age=0";
-    document.cookie = "iudx-ui-sso=false;max-age=0;domain=" + environment.parent_domain;
+    document.cookie = "iudx-ui-cat=logged-out;max-age=0";
+    document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
     this.keycloak.logout();
+    this.global.set_toaster('error','You have been logged out. Please login again.');
   }
 
   ngOnDestroy(): void {
