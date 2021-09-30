@@ -11,7 +11,6 @@ let open_window: any;
 })
 export class LoginPopupComponent implements OnInit {
   cookie_interval: any;
-
   constructor(private global: GlobalService) {
   }
 

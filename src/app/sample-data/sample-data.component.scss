@@ -40,9 +40,12 @@
   }
 
   .body {
-    padding: 0 30px;
-    max-height: 500px;
+    margin: 0 30px;
+    max-height: 400px;
     overflow-y: scroll;
+    background: var(--background);
+    padding: 15px;
+    border-radius: 10px;
     code{
       white-space: pre-wrap;
       word-break: break-all;

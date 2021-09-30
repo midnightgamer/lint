@@ -45,8 +45,13 @@ export class ResourceCardComponent implements OnInit {
   }
 
   openLatestData(id: string): void {
-    this.global.set_temp_data(id);
-    this.global.set_popup(true, 'latest-data');
+    let token = this.global.get_auth_token();
+    if(token && token != '') {
+      this.global.set_temp_data(id);
+      this.global.set_popup(true, 'latest-data');
+    } else {
+      this.global.set_popup(true,'login-popup');
+    }
   }
 
   openSampleData(data: any) {
