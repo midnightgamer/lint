@@ -52,7 +52,7 @@ export class AppComponent {
         let token = document.cookie.split('iudx-ui-cat=')[1].split(';')[0];
         await this.analyse_user_profile(token);
       } else {
-        this.keycloak.isLoggedIn().then(async result => {
+        await this.keycloak.isLoggedIn().then(async result => {
           if(result) {
             let token: any = await this.keycloak.getToken();
             await this.analyse_user_profile("Bearer " + token);

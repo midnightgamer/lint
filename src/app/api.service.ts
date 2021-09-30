@@ -103,6 +103,7 @@ export class ApiService {
 
   async get_latest_data(id: any, type: string) {
     let data: any = await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res', type);
+    return data;
   }
 
   async get_resource_map_data(id: any) {
@@ -111,6 +112,22 @@ export class ApiService {
 
   async get_user_profile() {
     return await this.network.get_api(environment.auth_url + 'auth/v1/user/profile', 'auth');
+  }
+
+  async get_res_public_token() {
+    let post_body = {
+      "itemId": environment.res_public_token_url,
+      "itemType": "resource_server",
+      "role": "consumer"
+    };
+    return await this.network.post_api(environment.auth_url + "auth/v1/token", post_body, 'auth');
+  }
+
+  async check_valid_token(token: any) {
+    let post_body = {
+      "accessToken": token
+    };
+    return await this.network.post_api(environment.auth_url + "auth/v1/introspect", post_body);
   }
 
 }

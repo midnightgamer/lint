@@ -290,7 +290,7 @@ export class GlobalService {
   }
 
   set_res_token(key: any, value: any) {
-    this.auth_token[key] = value;
+    this.res_token[key] = value;
   }
 
   get_res_token(key: any) {

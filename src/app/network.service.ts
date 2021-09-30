@@ -37,7 +37,7 @@ export class NetworkService {
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res') reject();
+        if(auth == 'res') reject(err);
         if(err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
@@ -54,7 +54,7 @@ export class NetworkService {
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res') reject();
+        if(auth == 'res') reject(err);
         if(err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
@@ -71,7 +71,7 @@ export class NetworkService {
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res') reject();
+        if(auth == 'res') reject(err);
         if(err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
@@ -88,7 +88,7 @@ export class NetworkService {
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res') reject();
+        if(auth == 'res') reject(err);
         if(err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();

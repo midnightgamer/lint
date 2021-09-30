@@ -12,5 +12,6 @@ export const environment = {
     url: 'https://identitydev.iudx.io/auth/',
     realm:'demo',
     clientId: 'angular-iudx-client'
-  }
+  },
+  res_public_token_url: 'rs.iudx.io'
 };
