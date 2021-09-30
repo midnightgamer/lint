@@ -102,7 +102,8 @@ export class NetworkService {
   }
 
   technicalErrorAlert(err: any) {
-    this.global.set_toaster('error', err.error.title);
+    let msg = err.error.title ? err.error.title : err.error.message;
+    this.global.set_toaster('error', msg);
   }
 
   unauthorizedErrorAlert() {

@@ -18,7 +18,7 @@ export class HomeComponent implements OnInit {
   };
   is_loaded = false;
 
-  constructor(private global: GlobalService, private route: ActivatedRoute, private api: ApiService) {
+  constructor(private global: GlobalService, private route: ActivatedRoute, private api: ApiService, private router: Router) {
     this.global.get_popup().subscribe((data) => {
       this.popup_status = data.flag;
       this.popup_type = data.type;
@@ -36,6 +36,7 @@ export class HomeComponent implements OnInit {
         });
         this.is_loaded = true;
       }, err => {
+        this.router.navigate(['/'], { replaceUrl: true });
       });
     });
   }

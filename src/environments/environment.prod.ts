@@ -13,5 +13,5 @@ export const environment = {
     realm:'demo',
     clientId: 'angular-iudx-client'
   },
-  res_public_token_url: 'rs.iudx.io'
+  res_public_token_url: 'rs.iudx.org.in'
 };
