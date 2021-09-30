@@ -4,10 +4,10 @@ export const environment = {
   web_url: 'catalogue.souptik.com',
   res_url: 'https://k8s-rs.iudx.io/',
   auth_url: 'https://authvertx.iudx.io/',
-  sso_url: 'https://authsso.souptik.com/',
+  sso_url: 'https://auth.souptik.com/',
   consumer_web: 'https://consumer.souptik.com/',
   provider_web: 'https://provider.souptik.com/',
-  parent_domain: '*.souptik.com',
+  parent_domain: 'souptik.com',
   keycloak: {
     url: 'https://identitydev.iudx.io/auth/',
     realm:'demo',

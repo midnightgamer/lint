@@ -63,10 +63,6 @@ export class AppComponent {
           }
         });
       }
-    } else {
-      this.cookie_interval = setInterval(()=>{
-        this.listen_cookie();
-      },100);
     }
     return true;
   }
