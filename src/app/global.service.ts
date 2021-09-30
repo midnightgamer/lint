@@ -25,7 +25,8 @@ export class GlobalService {
   temp_data: any;
   single_resource: any
   dataset_res: any;
-  token: any;
+  auth_token: any;
+  res_token: any;
   map_colors: any = [
     '#1c699d',
     '#ff7592',
@@ -40,7 +41,11 @@ export class GlobalService {
   constructor() {
     this.temp_data = {};
     this.user_profile = {};
-    this.token = undefined;
+    this.auth_token = '';
+    this.res_token = {
+      public: '',
+      private: ''
+    }
   }
 
   set_loader(flag: Boolean) {
@@ -276,12 +281,20 @@ export class GlobalService {
     this.dataset_res = res;
   }
 
-  set_token(value: any) {
-    this.token = value;
+  set_auth_token(value: any) {
+    this.auth_token = value;
   }
 
-  get_token() {
-    return this.token;
+  get_auth_token() {
+    return this.auth_token;
+  }
+
+  set_res_token(key: any, value: any) {
+    this.auth_token[key] = value;
+  }
+
+  get_res_token(key: any) {
+    return this.res_token[key];
   }
 
   set_user_profile(value: any) {

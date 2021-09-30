@@ -101,8 +101,8 @@ export class ApiService {
     return await this.network.get_api('relationship');
   }
 
-  async get_latest_data(id: any) {
-    return await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res');
+  async get_latest_data(id: any, type: string) {
+    let data: any = await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res', type);
   }
 
   async get_resource_map_data(id: any) {

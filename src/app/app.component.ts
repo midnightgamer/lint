@@ -89,7 +89,7 @@ export class AppComponent {
 
   async analyse_user_profile(token: any) {
     document.cookie = "iudx-ui-cat=" + token + ";max-age=10000000;";
-    this.global.set_token(token);
+    this.global.set_auth_token(token);
     let response: any = await this.api.get_user_profile();
     this.global.set_user_profile(response.results);
     return true;
