@@ -17,7 +17,7 @@
           <p>{{user_profile.email}}</p>
         </div>
         <ul class="panels">
-          <li>Your Dashboard</li>
+          <li (click)="navigateToConsumerPanel()">Your Dashboard</li>
         </ul>
         <div class="logout" (click)="logout($event)">
           Sign out

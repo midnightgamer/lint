@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GlobalService} from 'src/app/global.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -40,5 +41,9 @@ export class MenuComponent implements OnInit {
     this.global.set_filters(filters);
     this.router.navigate(['/datasets']);
     this.closePopup();
+  }
+
+  navigateToProviderPanel(): void {
+    window.open(environment.provider_web, "_blank");
   }
 }

@@ -40,6 +40,10 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.global.set_popup(true, 'search-popup');
   }
 
+  navigateToConsumerPanel(): void {
+    window.open(environment.consumer_web, "_blank");
+  }
+
   loggedIn(): void {
    this.cookie_interval = setInterval(()=>{
       this.listen_cookie();
