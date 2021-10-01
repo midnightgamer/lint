@@ -59,9 +59,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/dataset', item.unique_id])
   }
 
-  doSearch(): void {
+  doSearch(ignoreQuery? : boolean): void {
     let filters = this.global.get_default_filters();
-    filters.search = this.query;
+    if (!ignoreQuery) filters.search = this.query;
     this.global.set_filters(filters);
     this.router.navigate(['/datasets']);
   }
