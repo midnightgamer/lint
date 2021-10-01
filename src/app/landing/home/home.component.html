@@ -59,7 +59,7 @@
       </a>
       <ul class="stats">
         <li>
-          <a routerLink="/datasets">
+          <a (click)="doSearch(true)">
             <img src="./assets/datasets.svg" >
             <div>
               <span class="count">{{summary.summary.datasets}}</span>
