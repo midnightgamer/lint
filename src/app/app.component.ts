@@ -58,7 +58,7 @@ export class AppComponent {
             await this.analyse_user_profile("Bearer " + token);
           } else {
             this.keycloak.login({
-              redirectUri: window.location.origin
+              redirectUri: window.location.href
             });
           }
         });

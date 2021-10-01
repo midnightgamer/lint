@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  mlayer_url: 'https://mlayer.souptik.com/',
+  mlayer_url: 'https://mlayer.iudx.io/',
   web_url: 'catalogue.souptik.com',
   res_url: 'https://k8s-rs.iudx.io/',
   auth_url: 'https://authvertx.iudx.io/',
