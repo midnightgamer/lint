@@ -6,7 +6,7 @@ export const environment = {
   auth_url: 'https://authvertx.iudx.io/',
   sso_url: 'https://authsso.iudx.io/',
   consumer_web: 'https://consumer.iudx.io/',
-  provider_web: 'https://provider.iudx.io/',
+  provider_web: 'https://publisher.iudx.io/',
   parent_domain: 'iudx.io',
   keycloak: {
     url: 'https://identitydev.iudx.io/auth/',
