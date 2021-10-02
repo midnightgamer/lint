@@ -7,9 +7,9 @@ export const environment = {
   sso_url: 'https://authsso.iudx.org.in/',
   consumer_web: 'https://consumer.iudx.org.in/',
   provider_web: 'https://provider.iudx.org.in/',
-  parent_domain: '*.iudx.org.in',
+  parent_domain: 'iudx.org.in',
   keycloak: {
-    url: 'https://identitydev.iudx.io/auth/',
+    url: 'https://identitydev.iudx.org.in/auth/',
     realm:'demo',
     clientId: 'angular-iudx-client'
   },

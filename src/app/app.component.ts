@@ -99,10 +99,4 @@ export class AppComponent {
     return true;
   }
 
-  listen_cookie() {
-    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1]) {
-      if(document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') this.initialize();
-    }
-  }
-
 }

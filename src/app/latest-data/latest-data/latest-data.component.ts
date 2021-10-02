@@ -9,7 +9,7 @@ import { GlobalService } from 'src/app/global.service';
 })
 export class LatestDataComponent implements OnInit {
   resource_id: string;
-  latest_data: any = {};
+  latest_data: any = '';
   constructor(private global: GlobalService, private api: ApiService) {
     this.resource_id = this.global.get_temp_data();
     this.get_latest_data();

@@ -9,7 +9,7 @@
     <img class="search-icon" (click)="openSearchPopup()"
          src="assets/search.svg">
 
-    <div class="user" *ngIf="isLoggedIn" (click)="toggleProfile($event)">
+    <div class="user" *ngIf="isLoggedIn" (click)="toggleProfile()">
       <img src="assets/user.svg">
       <div class="userPopup" *ngIf="showProfilePopup">
         <div class="userInfo">
@@ -19,7 +19,7 @@
         <ul class="panels">
           <li (click)="navigateToConsumerPanel()">Your Dashboard</li>
         </ul>
-        <div class="logout" (click)="logout($event)">
+        <div class="logout" (click)="logout()">
           Sign out
         </div>
       </div>

@@ -51,13 +51,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
     open_window = window.open(environment.sso_url, '_blank');
   }
 
-  toggleProfile(event: Event): void {
-    event.stopPropagation();
+  toggleProfile(): void {
     this.showProfilePopup = !this.showProfilePopup;
   }
 
-  logout(event: Event): void {
-    event.stopPropagation();
+  logout(): void {
     document.cookie = "iudx-ui-cat=logged-out;max-age=0";
     document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
     this.global.set_toaster('error','You have been logged out. Please login again.');
@@ -80,4 +78,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     }
   }
 
+  visit_profile() {
+    open_window = window.open(environment.sso_url, '_blank');
+  }
 }

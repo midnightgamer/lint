@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   mlayer_url: 'https://mlayer.iudx.io/',
-  web_url: 'catalogue.souptik.com',
+  web_url: 'catalogue.iudx.io',
   res_url: 'https://k8s-rs.iudx.io/',
   auth_url: 'https://authvertx.iudx.io/',
-  sso_url: 'https://auth.souptik.com/',
-  consumer_web: 'https://consumer.souptik.com/',
-  provider_web: 'https://provider.souptik.com/',
-  parent_domain: 'souptik.com',
+  sso_url: 'https://authsso.iudx.io/',
+  consumer_web: 'https://consumer.iudx.io/',
+  provider_web: 'https://provider.iudx.io/',
+  parent_domain: 'iudx.io',
   keycloak: {
     url: 'https://identitydev.iudx.io/auth/',
     realm:'demo',
