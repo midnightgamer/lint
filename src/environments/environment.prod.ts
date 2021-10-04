@@ -1,16 +1,16 @@
 export const environment = {
   production: true,
-  mlayer_url: 'https://mlayer.souptik.com/',
+  mlayer_url: 'https://mlayer.iudx.org.in/',
   web_url: 'catalogue.iudx.org.in',
   res_url: 'https://rs.iudx.org.in/',
-  auth_url: 'https://authvertx.iudx.org.in/',
+  auth_url: 'https://auth.iudx.org.in/',
   sso_url: 'https://authsso.iudx.org.in/',
   consumer_web: 'https://consumer.iudx.org.in/',
   provider_web: 'https://publisher.iudx.org.in/',
   parent_domain: 'iudx.org.in',
   keycloak: {
-    url: 'https://identitydev.iudx.org.in/auth/',
-    realm:'demo',
+    url: 'https://keycloak.iudx.org.in/auth/',
+    realm:'iudx',
     clientId: 'angular-iudx-client'
   },
   res_public_token_url: 'rs.iudx.org.in'
