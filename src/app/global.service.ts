@@ -38,6 +38,7 @@ export class GlobalService {
     '#9b59b6',
   ];
   user_profile: any;
+  role: any;
   constructor() {
     this.temp_data = {};
     this.user_profile = {};
@@ -46,6 +47,15 @@ export class GlobalService {
       public: '',
       private: ''
     }
+    this.role = '';
+  }
+
+  get_role() {
+    return this.role;
+  }
+
+  set_role(value: any) {
+    this.role = value;
   }
 
   set_loader(flag: Boolean) {

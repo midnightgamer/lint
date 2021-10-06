@@ -6,9 +6,7 @@
   </div>
 
   <div class="right">
-    <img class="search-icon" (click)="openSearchPopup()"
-         src="assets/search.svg">
-
+    <img class="search-icon" (click)="openSearchPopup()" src="assets/search.svg">
     <div class="user" *ngIf="isLoggedIn" (click)="toggleProfile()">
       <img src="assets/user.svg">
       <div class="userPopup" *ngIf="showProfilePopup">
@@ -16,7 +14,7 @@
           <span>{{user_profile.name.firstName}} {{user_profile.name.lastName}}</span>
           <p>{{user_profile.email}}</p>
         </div>
-        <ul class="panels">
+        <ul class="panels" *ngIf="role == 'consumer'">
           <li (click)="navigateToConsumerPanel()">Your Dashboard</li>
         </ul>
         <div class="logout" (click)="logout()">

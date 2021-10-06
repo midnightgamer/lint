@@ -19,12 +19,14 @@ export class HeaderComponent implements OnInit, OnDestroy {
   auth_window: any;
   user_profile: any;
   cookie_interval: any;
+  role: any;
   constructor(private global: GlobalService, private keycloak: KeycloakService) {
     this.popup_sub = this.global.get_popup().subscribe((data) => {
       this.popup_status = data.flag;
       this.popup_type = data.type;
     });
     this.user_profile = this.global.get_user_profile();
+    this.role = this.global.get_role();
     if(this.user_profile.userId) this.isLoggedIn = true;
   }
 
