@@ -47,7 +47,7 @@ export class ResourceCardComponent implements OnInit {
   openLatestData(id: string): void {
     let token = this.global.get_auth_token();
     if(token && token != '') {
-      if(this.global.get_role() != 'consumer') this.global.set_toaster('error','Login as a consumer to use the features of our website.');
+      if(this.global.get_role() != 'consumer') return this.global.set_toaster('error','Login as a consumer to use the features of our website.');
       this.global.set_temp_data(id);
       this.global.set_popup(true, 'latest-data');
     } else {

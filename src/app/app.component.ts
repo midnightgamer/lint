@@ -91,13 +91,14 @@ export class AppComponent {
     this.global.set_auth_token(token);
     let response: any = await this.api.get_user_profile();
     let profile = response.results;
+    this.global.set_user_profile(response.results);
+    let role = response.results.roles.includes('consumer') ? 'consumer' : 'non-consumer';
+    this.global.set_role(role);
     if(profile.roles.includes('consumer')) {
-      this.global.set_user_profile(response.results);
-      let role = response.results.roles.includes('consumer') ? 'consumer' : 'non-consumer';
-      this.global.set_role(role);
       document.cookie = "iudx-ui-cat=" + token + ";max-age=10000000;";
+    } else {
+      this.global.set_toaster('error',"You don't have access to this panel.");
     }
-    else this.global.set_toaster('error',"You don't have access to this panel.");
     return true;
   }
 
