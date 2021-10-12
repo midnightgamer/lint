@@ -48,9 +48,9 @@ export class AppComponent {
 
   async analyse_user_login() {
     if(document.cookie && document.cookie.split('iudx-ui-sso=')[1] && document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') {
-      if(document.cookie && document.cookie.split('iudx-ui-cat=')[1]){
-        let token = document.cookie.split('iudx-ui-cat=')[1].split(';')[0];
-        await this.analyse_user_profile(token);
+      let lstoken = localStorage.getItem('iudx-ui-cat-auth-token');
+      if(lstoken && lstoken != ''){
+        await this.analyse_user_profile(lstoken);
       } else {
         await this.keycloak.isLoggedIn().then(async result => {
           if(result) {
@@ -95,7 +95,7 @@ export class AppComponent {
     let role = response.results.roles.includes('consumer') ? 'consumer' : 'non-consumer';
     this.global.set_role(role);
     if(profile.roles.includes('consumer')) {
-      document.cookie = "iudx-ui-cat=" + token + ";max-age=10000000;";
+      localStorage.setItem('iudx-ui-cat-auth-token',token);
     } else {
       this.global.set_toaster('error',"You don't have access to this panel.");
     }
