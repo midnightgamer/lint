@@ -10,7 +10,7 @@ export const environment = {
   parent_domain: 'iudx.io',
   keycloak: {
     url: 'https://k8s-keycloak.iudx.io/auth/',
-    realm:'iudxtesting',
+    realm:'iudx',
     clientId: 'angular-iudx-client'
   },
   res_public_token_url: 'rs.iudx.io'
