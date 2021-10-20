@@ -29,7 +29,6 @@ export class RequestAccessPopupComponent implements OnInit {
   }
 
   async submit(): Promise<any> {
-
     if (this.year < 0) {
       return this.global.set_toaster('error', `Year should be greater than or equal to 0 `);
     }
@@ -47,7 +46,6 @@ export class RequestAccessPopupComponent implements OnInit {
       return this.global.set_toaster('error', `Year, Month and Day all can't be 0`);
     }
     let expiryDate = this.encodeTime();
-    let res = await this.api.request_dataset(this.dataset_id, 'resource_group', expiryDate)
-    console.log(res)
+    let res = await this.api.request_dataset(this.dataset_id, 'resource_group', expiryDate);
   }
 }
