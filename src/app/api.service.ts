@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {NetworkService} from "./network.service";
 import {GlobalService} from "./global.service";
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -65,9 +65,9 @@ export class ApiService {
       domains: [],
       search: ''
     };
-    if(filters) {
-      for(let key in post_body) {
-        if(filters[key]) {
+    if (filters) {
+      for (let key in post_body) {
+        if (filters[key]) {
           post_body[key] = filters[key];
         }
       }
@@ -87,9 +87,9 @@ export class ApiService {
       instance: this.global.get_active_city(),
       datasets: []
     };
-    if(filters) {
-      for(let key in post_body) {
-        if(filters[key]) {
+    if (filters) {
+      for (let key in post_body) {
+        if (filters[key]) {
           post_body[key] = filters[key];
         }
       }
@@ -103,13 +103,22 @@ export class ApiService {
 
   async get_latest_data(id: any, type: string) {
     let isToken = await this.get_res_public_token();
-    if (!isToken) return { 'type': 'ERROR', 'message': 'Not Authorized Consumer'};
+    if (!isToken) return {
+      'type': 'ERROR',
+      'message': 'Not Authorized Consumer'
+    };
     let data: any = await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities/' + id, 'res', type);
     return data;
   }
 
-  async get_resource_map_data(id: any) {
-    return { results: [] };
+  async get_resource_map_data(id: any, type: string) {
+    let isToken = await this.get_res_public_token();
+    if (!isToken) return {
+      'type': 'ERROR',
+      'message': 'Not Authorized Consumer'
+    };
+    let data: any = await this.network.get_api(environment.res_url + 'ngsi-ld/v1/entities?id=' + id + '&q=id==' + id, 'res', type);
+    return data;
   }
 
   async get_user_profile() {
@@ -121,7 +130,7 @@ export class ApiService {
     let isTokenNeeded = false;
     if (token) {
       let valid: any = await this.check_valid_token(token);
-      if (!valid || !valid.type  || valid.type.indexOf('Success') == -1) {
+      if (!valid || !valid.type || valid.type.indexOf('Success') == -1) {
         isTokenNeeded = true;
       }
     } else {
@@ -148,6 +157,30 @@ export class ApiService {
       "accessToken": token
     };
     return await this.network.post_api(environment.auth_url + "auth/v1/introspect", post_body, 'no-error');
+  }
+
+  async request_dataset(id: string, itemType: string, expiry: any) {
+    let isToken = await this.get_res_public_token();
+    if (!isToken) return {
+      'type': 'ERROR',
+      'message': 'Not Authorized Consumer'
+    };
+    let body = {
+      "request": [{
+        "itemId": id,
+        "itemType": itemType,
+        "expiryDuration": expiry,
+        "constraints": {
+          "access": [
+            "api",
+            "subs",
+            "file"
+          ]
+        }
+      }]
+    };
+    let data: any = await this.network.post_api(environment.auth_url + 'auth/v1/policies/requests', body, 'auth', 'public');
+    return data;
   }
 
 }

@@ -79,7 +79,7 @@ export class GsMapComponent implements OnInit {
   getMapData() {
     let data = [];
     let isName: Boolean;
-    this.api.get_resource_map_data(this.resources.id)
+    this.api.get_resource_map_data(this.resources.id,'public')
       .then((data: any) => {
         this.results = data.results;
         for (let i = 0; i < this.results.length; i++) {

@@ -27,6 +27,7 @@ export class GlobalService {
   dataset_res: any;
   auth_token: any;
   res_token: any;
+  request_dataset_id: string = '';
   map_colors: any = [
     '#1c699d',
     '#ff7592',
@@ -39,6 +40,7 @@ export class GlobalService {
   ];
   user_profile: any;
   role: any;
+
   constructor() {
     this.temp_data = {};
     this.user_profile = {};
@@ -313,6 +315,14 @@ export class GlobalService {
 
   get_user_profile() {
     return this.user_profile;
+  }
+
+  set_request_dataset_id(id: string): void {
+    this.request_dataset_id = id;
+  }
+
+  get_request_dataset_id(): string {
+    return this.request_dataset_id;
   }
 
 }

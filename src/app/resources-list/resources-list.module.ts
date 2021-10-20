@@ -18,6 +18,7 @@ import { RequestAccessPopupComponent } from './request-access-popup/request-acce
 import { SampleDataModule } from '../sample-data/sample-data.module';
 import { LatestDataModule } from '../latest-data/latest-data.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -34,15 +35,16 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     ApiLinkPopupComponent,
     RequestAccessPopupComponent,
   ],
-  imports: [
-    CommonModule,
-    ResourcesListRoutingModule,
-    ResourceCardModule,
-    AccessTagsModule,
-    SampleDataModule,
-    LeafletModule,
-    LatestDataModule
-  ],
+    imports: [
+        CommonModule,
+        ResourcesListRoutingModule,
+        ResourceCardModule,
+        AccessTagsModule,
+        SampleDataModule,
+        LeafletModule,
+        LatestDataModule,
+        FormsModule
+    ],
   exports:[
     GsMapComponent,
     FilesPopupComponent,

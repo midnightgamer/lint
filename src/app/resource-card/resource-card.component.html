@@ -24,12 +24,12 @@
         <img src="/assets/eye.svg"/>
         <span>View Latest Data</span>
       </div>
-      <!--<div
+      <div
         *ngIf="resource.resourceType == 'GSLAYER' && resource.dataDescriptor?.location.dataSchema == 'iudx:Point'"
         class="col col-left">
         <img src="./../../../assets/map.svg"/>
         <span (click)="openGsMap(resource)">Map view</span>
-      </div>-->
+      </div>
       <div (click)="copy()" class="col col-left">
         <img src="assets/copy-dark.svg"/>
         <span>Copy resource ID</span>

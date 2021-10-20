@@ -52,7 +52,8 @@ export class DatasetDescComponent implements OnInit {
 
   openRequestAccess(event: Event): void {
     event.preventDefault();
-    //this.global.set_popup(true, 'request-access');
+    this.global.set_request_dataset_id(this.dataset.id)
+    this.global.set_popup(true, 'request-access');
   }
 
   copy(): void {

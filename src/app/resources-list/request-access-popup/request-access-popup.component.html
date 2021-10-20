@@ -14,20 +14,32 @@
       <div class="input-container">
         <label>
           Years
-          <input type="text" value="1" maxlength="1">
+          <input type="number"
+                 onkeypress="return (event.charCode === 8 || event.charCode === 0 ||
+                 event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                 [(ngModel)]="year" min="0"
+                 max="10" >
         </label>
         <label>
           Months
-          <input type="text" value="0" maxlength="2">
+          <input type="number"
+                 onkeypress="return (event.charCode === 8 || event.charCode === 0 ||
+                  event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                 [(ngModel)]="month" min="0"
+                 max="12" >
         </label>
         <label>
           Days
-          <input type="text" value="0" maxlength="2">
+          <input type="number"
+                 onkeypress="return (event.charCode === 8 || event.charCode === 0 ||
+                  event.charCode === 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+                 [(ngModel)]="day" min="0"
+                 max="31" >
         </label>
       </div>
     </div>
     <div class="buttons">
-      <button>Save</button>
+      <button (click)="submit()">Submit</button>
       <div class="cancel" (click)="closePopup()">Cancel</div>
     </div>
   </div>
