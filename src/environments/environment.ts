@@ -3,6 +3,7 @@ export const environment = {
   mlayer_url: 'https://mlayer.iudx.io/',
   web_url: 'catalogue.iudx.io',
   res_url: 'https://k8s-rs.iudx.io/',
+  cat_url: 'https://api.catalogue.iudx.io/iudx/cat/v1/',
   auth_url: 'https://authvertx.iudx.io/',
   sso_url: 'http://localhost:4200/',
   consumer_web: 'http://localhost:5000/',
@@ -10,7 +11,7 @@ export const environment = {
   parent_domain: 'localhost',
   keycloak: {
     url: 'https://identitydev.iudx.io/auth/',
-    realm:'demo',
+    realm: 'demo',
     clientId: 'angular-iudx-client'
   },
   res_public_token_url: 'rs.iudx.io'

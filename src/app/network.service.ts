@@ -2,17 +2,18 @@ import {Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
 import {GlobalService} from "./global.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { KeycloakService } from 'keycloak-angular';
+import {KeycloakService} from 'keycloak-angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class NetworkService {
   url: string;
+
   constructor(
     private global: GlobalService,
     private http: HttpClient,
-    private keycloak:KeycloakService
+    private keycloak: KeycloakService
   ) {
     this.url = environment.mlayer_url;
   }
@@ -20,10 +21,13 @@ export class NetworkService {
   get_headers(auth: any, type?: string) {
     let headers: any = {};
     let token = this.global.get_auth_token();
-    if(auth == 'auth' && token) {
+    if (auth == 'auth' && token) {
       headers["Authorization"] = this.global.get_auth_token();
     }
-    if(auth == 'res' && token) {
+    if (auth == 'cat') {
+      headers["instance"] = this.global.get_active_city();
+    }
+    if (auth == 'res' && token) {
       headers["token"] = this.global.get_res_token(type);
     }
     return headers;
@@ -32,13 +36,13 @@ export class NetworkService {
   get_api(url: string, auth?: string, type?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.get(this.get_url(url), { headers: new HttpHeaders(this.get_headers(auth, type)) }).subscribe(async (data: any) => {
+      this.http.get(this.get_url(url), {headers: new HttpHeaders(this.get_headers(auth, type))}).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
-        if(err.status == 401) this.unauthorizedErrorAlert();
+        if (auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
+        if (err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
         reject(err);
@@ -49,13 +53,13 @@ export class NetworkService {
   post_api(url: string, post_body: object, auth?: string, type?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.post(this.get_url(url), post_body, { headers: new HttpHeaders(this.get_headers(auth, type)) }).subscribe(async (data: any) => {
+      this.http.post(this.get_url(url), post_body, {headers: new HttpHeaders(this.get_headers(auth, type))}).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
-        if(err.status == 401) this.unauthorizedErrorAlert();
+        if (auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
+        if (err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
         reject(err);
@@ -66,13 +70,13 @@ export class NetworkService {
   put_api(url: string, put_body: object, auth?: string, type?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.put(this.get_url(url), put_body, { headers: new HttpHeaders(this.get_headers(auth, type)) }).subscribe(async (data: any) => {
+      this.http.put(this.get_url(url), put_body, {headers: new HttpHeaders(this.get_headers(auth, type))}).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
-        if(err.status == 401) this.unauthorizedErrorAlert();
+        if (auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
+        if (err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
         reject(err);
@@ -83,13 +87,13 @@ export class NetworkService {
   delete_api(url: string, auth?: string, type?: string) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.delete(this.get_url(url), { headers: new HttpHeaders(this.get_headers(auth, type)) }).subscribe(async (data: any) => {
+      this.http.delete(this.get_url(url), {headers: new HttpHeaders(this.get_headers(auth, type))}).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
         this.global.set_loader(false);
-        if(auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
-        if(err.status == 401) this.unauthorizedErrorAlert();
+        if (auth == 'res' || (auth == 'auth' && type == 'no-error')) reject(err);
+        if (err.status == 401) this.unauthorizedErrorAlert();
         else if (err.status == 400 || err.status == 404) this.technicalErrorAlert(err);
         else if (err.status == 500 || err.status == 501 || err.status == 502 || err.status == 503 || err.status == 504) this.serverErrorAlert();
         reject(err);
@@ -110,10 +114,10 @@ export class NetworkService {
     document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
     this.global.set_auth_token('');
     localStorage.removeItem('iudx-ui-cat-auth-token');
-    this.global.set_toaster('error','You have been logged out. Please login again.');
-    setTimeout(()=>{
+    this.global.set_toaster('error', 'You have been logged out. Please login again.');
+    setTimeout(() => {
       this.keycloak.logout();
-    },100);
+    }, 100);
   }
 
   get_url(url: any) {

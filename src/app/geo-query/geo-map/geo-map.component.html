@@ -3,6 +3,7 @@
        id="map" leaflet (leafletMapReady)="on_map_ready($event)"
        leafletDraw
        [leafletDrawOptions]="drawOptions"
+       (leafletDrawCreated)="onDrawCreated($event)"
        [leafletOptions]="leaflet_options">
     <div [leafletLayer]="drawItems"></div>
   </div>

@@ -183,4 +183,17 @@ export class ApiService {
     return data;
   }
 
+  async get_special_data(data: any): Promise<any> {
+    let newParams = `geoproperty=location&georel=${data.type}&geometry=${data.geometry}`;
+    if (data.geometry == 'Point') {
+      newParams += `&maxDistance=${JSON.stringify(data.radius)}`
+    }
+    if (data.geometry == 'Polygon') {
+      newParams += `&coordinates=${JSON.stringify([data.coordinates])}`
+    } else {
+      newParams += `&coordinates=${JSON.stringify(data.coordinates)}`
+    }
+    return await this.network.get_api(environment.cat_url + `search?${newParams}`, 'cat', '');
+
+  }
 }

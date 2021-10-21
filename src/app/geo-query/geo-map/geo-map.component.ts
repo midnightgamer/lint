@@ -1,7 +1,7 @@
-import {Component, ElementRef, NgZone, OnInit} from '@angular/core';
+import {Component,  OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as L from 'leaflet';
-import {latLng, FeatureGroup, Map, featureGroup} from 'leaflet';
+import {latLng, FeatureGroup, Map, featureGroup, DrawEvents} from 'leaflet';
 import {ApiService} from 'src/app/api.service';
 import {GlobalService} from 'src/app/global.service';
 import {NetworkService} from "../../network.service";
@@ -22,17 +22,24 @@ export class GeoMapComponent implements OnInit {
   pathFillColor: string[] = this.global.get_map_colors();
   polygonColor: string[] = this.global.get_map_colors();
   drawItems: FeatureGroup = featureGroup();
+  is_drawn: boolean;
+  filtered_resource_items = [];
+  drawQuery = {}
+
   constructor(
     private router: Router,
     private global: GlobalService,
     private network: NetworkService,
     private api: ApiService
   ) {
+    this.is_drawn = false;
     this.city = this.global.get_city();
     this.datasets = this.global.get_datasets();
     this.leaflet_options = {};
     this.initialize_dataset_filters();
     this.getMapData();
+
+
     this.global.get_popup().subscribe((data) => {
       if (data.flag == false && data.type == 'geo-filter') {
         this.markersLayer.clearLayers();
@@ -52,7 +59,7 @@ export class GeoMapComponent implements OnInit {
 
   initMap() {
     let zoom = 11;
-    var map_options = {
+    return  {
       layers: [
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {maxZoom: 19})
       ],
@@ -62,7 +69,6 @@ export class GeoMapComponent implements OnInit {
         lat: this.city.coordinates[0]
       }),
     };
-    return map_options;
   }
 
   initialize_dataset_filters() {
@@ -75,11 +81,7 @@ export class GeoMapComponent implements OnInit {
       this.global.set_dataset_filters(this.dataset_filters);
     }
   }
-  drawOptions = {
-    edit: {
-      featureGroup: this.drawItems
-    }
-  };
+
   getMarkerIcon(resource: any) {
     return L.divIcon({
       className: 'custom-div-icon',
@@ -146,6 +148,7 @@ export class GeoMapComponent implements OnInit {
   }
 
   getMapData() {
+    this.filtered_resource_items = [];
     let filters = {datasets: this.dataset_filters};
     this.api
       .get_geoquery_resource_list(filters)
@@ -155,6 +158,71 @@ export class GeoMapComponent implements OnInit {
       });
   }
 
+  /*Draw */
+  drawOptions = {
+    draw: {
+      marker: undefined,
+      circlemarker: undefined,
+      polyline: undefined,
+    },
+    edit: {
+      featureGroup: this.drawItems
+    }
+  };
 
+  onDrawCreated(e: any) {
+    this.drawItems.clearLayers();
+    this.drawItems.addLayer((e as DrawEvents.Created).layer);
+    let type = e.layerType;
+    if (type === 'circle') {
+      let geometry = 'Point';
+      let types = 'intersects';
+      let point = [];
+      const center_point = e.layer._latlng;
+      point.push(center_point['lng'], center_point['lat']);
+      let radius = Math.ceil(e.layer._mRadius);
+      this.markersLayer.clearLayers();
+      this.api_call(point, radius, types, geometry);
 
+    }
+  }
+
+  async api_call(points: any, radius: number, types: string, geometry: string) {
+    let drawQuery = {
+      type: types,
+      geometry: geometry,
+      radius: radius,
+      coordinates: points,
+    };
+    let res = await this.api.get_special_data(drawQuery)
+    this.resources = this.parseResourcesData(res.results);
+    this.mark_on_map();
+  }
+
+  parseResourcesData(results: any) {
+    let city = this.global.get_city();
+
+    return results.map((item: any) => {
+      let uniqueID = item.resourceGroup.replace(/\//g, "-");
+      let filter = this.datasets.filter((data: any) => {
+        return data.unique_id === uniqueID;
+      });
+      let dataset = filter[0];
+      let provider = filter[0].provider
+      return {
+        dataset: dataset,
+        id: item.id,
+        name: item.name,
+        description: item.description,
+        label: item.label,
+        location: item.location,
+        instance: item.instance,
+        icon: city ? city.icon : 'https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/instances/default-city.png',
+        provider: provider,
+        itemStatus: item.itemStatus,
+        itemCreatedAt: item.itemCreatedAt,
+        // resourceType: item.resourceType
+      }
+    })
+  }
 }
