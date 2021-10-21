@@ -177,7 +177,7 @@ export class GeoMapComponent implements OnInit {
       let types = 'intersects';
       let point = [];
       const center_point = e.layer._latlng;
-      point.push(center_point['lng'].toFixed(6), center_point['lat'].toFixed(6));
+      point.push(this.get_precision(center_point['lng'], 6), this.get_precision(center_point['lat'], 6));
       let radius = Math.ceil(e.layer._mRadius);
       this.markersLayer.clearLayers();
       this.api_call(point, radius, types, geometry);
@@ -187,9 +187,9 @@ export class GeoMapComponent implements OnInit {
       let points = e.layer._latlngs[0];
       let polyPoints = [];
       points.forEach((p: { lng: any; lat: any; }) => {
-        polyPoints.push([p.lng.toFixed(6), p.lat.toFixed(6)]);
+        polyPoints.push([this.get_precision(p.lng, 6), this.get_precision(p.lat, 6)]);
       });
-      polyPoints.push([points[0].lng.toFixed(6), points[0].lat.toFixed(6)]);
+      polyPoints.push([this.get_precision(points[0].lng, 6), this.get_precision(points[0].lat, 6)]);
       let radius = 0;
       this.markersLayer.clearLayers();
       this.api_call(polyPoints, radius, types, geometry);
@@ -199,11 +199,15 @@ export class GeoMapComponent implements OnInit {
       let radius = 0;
       let bound_points = e.layer._latlngs[0];
       let boundingPoints = [];
-      boundingPoints.push([bound_points[1]['lng'].toFixed(6), bound_points[1]['lat'].toFixed(6)]);
-      boundingPoints.push([bound_points[3]['lng'].toFixed(6), bound_points[3]['lat'].toFixed(6)]);
+      boundingPoints.push([this.get_precision(bound_points[1]['lng'], 6), this.get_precision(bound_points[1]['lat'], 6)]);
+      boundingPoints.push([this.get_precision(bound_points[3]['lng'], 6), this.get_precision(bound_points[3]['lat'], 6)]);
       this.markersLayer.clearLayers();
       this.api_call(boundingPoints, radius, types, geometry);
     }
+  }
+
+  get_precision(value: any, precision: number) {
+    return parseFloat(value.toFixed(precision));
   }
 
   async api_call(points: any, radius: number, types: string, geometry: string) {
