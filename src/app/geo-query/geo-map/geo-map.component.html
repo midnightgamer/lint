@@ -1,3 +1,9 @@
 <div class="map">
-  <div class="map_container" id="map" leaflet (leafletMapReady)="on_map_ready($event)" [leafletOptions]="leaflet_options"></div>
+  <div class="map_container"
+       id="map" leaflet (leafletMapReady)="on_map_ready($event)"
+       leafletDraw
+       [leafletDrawOptions]="drawOptions"
+       [leafletOptions]="leaflet_options">
+    <div [leafletLayer]="drawItems"></div>
+  </div>
 </div>

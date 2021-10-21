@@ -21,7 +21,7 @@ export class GeoMapComponent implements OnInit {
   markersLayer = new L.FeatureGroup();
   pathFillColor: string[] = this.global.get_map_colors();
   polygonColor: string[] = this.global.get_map_colors();
-
+  drawItems: FeatureGroup = featureGroup();
   constructor(
     private router: Router,
     private global: GlobalService,
@@ -75,7 +75,11 @@ export class GeoMapComponent implements OnInit {
       this.global.set_dataset_filters(this.dataset_filters);
     }
   }
-
+  drawOptions = {
+    edit: {
+      featureGroup: this.drawItems
+    }
+  };
   getMarkerIcon(resource: any) {
     return L.divIcon({
       className: 'custom-div-icon',
@@ -108,7 +112,6 @@ export class GeoMapComponent implements OnInit {
   }
 
   mark_on_map() {
-    //console.log(this.resources);
     for (let resource of this.resources) {
       if (this.checkGeometryType(resource, 'Point')) {
         var lng = resource.location.geometry.coordinates[0];
@@ -151,5 +154,7 @@ export class GeoMapComponent implements OnInit {
         this.mark_on_map();
       });
   }
+
+
 
 }

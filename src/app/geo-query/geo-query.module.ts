@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { GeoMapComponent } from './geo-map/geo-map.component';
 import { FiltersComponent } from './filters/filters.component';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { LeafletDrawModule } from "@asymmetrik/ngx-leaflet-draw";
 import {FormsModule} from "@angular/forms";
 
 @NgModule({
@@ -18,7 +19,8 @@ import {FormsModule} from "@angular/forms";
     CommonModule,
     GeoQueryRoutingModule,
     FormsModule,
-    LeafletModule
+    LeafletModule,
+    LeafletDrawModule
   ]
 })
 export class GeoQueryModule { }
