@@ -1,4 +1,4 @@
-import {Component,  OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import * as L from 'leaflet';
 import {latLng, FeatureGroup, Map, featureGroup, DrawEvents} from 'leaflet';
@@ -23,7 +23,6 @@ export class GeoMapComponent implements OnInit {
   polygonColor: string[] = this.global.get_map_colors();
   drawItems: FeatureGroup = featureGroup();
   is_drawn: boolean;
-  filtered_resource_items = [];
   drawQuery = {}
 
   constructor(
@@ -59,7 +58,7 @@ export class GeoMapComponent implements OnInit {
 
   initMap() {
     let zoom = 11;
-    return  {
+    return {
       layers: [
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {maxZoom: 19})
       ],
@@ -116,8 +115,8 @@ export class GeoMapComponent implements OnInit {
   mark_on_map() {
     for (let resource of this.resources) {
       if (this.checkGeometryType(resource, 'Point')) {
-        var lng = resource.location.geometry.coordinates[0];
-        var lat = resource.location.geometry.coordinates[1];
+        let lng = resource.location.geometry.coordinates[0];
+        let lat = resource.location.geometry.coordinates[1];
         const markers = L.marker([lat, lng], {
           icon: this.getMarkerIcon(resource),
         }).bindPopup(`
@@ -148,7 +147,6 @@ export class GeoMapComponent implements OnInit {
   }
 
   getMapData() {
-    this.filtered_resource_items = [];
     let filters = {datasets: this.dataset_filters};
     this.api
       .get_geoquery_resource_list(filters)
@@ -179,11 +177,32 @@ export class GeoMapComponent implements OnInit {
       let types = 'intersects';
       let point = [];
       const center_point = e.layer._latlng;
-      point.push(center_point['lng'], center_point['lat']);
+      point.push(center_point['lng'].toFixed(6), center_point['lat'].toFixed(6));
       let radius = Math.ceil(e.layer._mRadius);
       this.markersLayer.clearLayers();
       this.api_call(point, radius, types, geometry);
-
+    } else if (type === 'polygon') {
+      let geometry = 'Polygon';
+      let types = 'within';
+      let points = e.layer._latlngs[0];
+      let polyPoints = [];
+      points.forEach((p: { lng: any; lat: any; }) => {
+        polyPoints.push([p.lng.toFixed(6), p.lat.toFixed(6)]);
+      });
+      polyPoints.push([points[0].lng.toFixed(6), points[0].lat.toFixed(6)]);
+      let radius = 0;
+      this.markersLayer.clearLayers();
+      this.api_call(polyPoints, radius, types, geometry);
+    }else if (type === 'rectangle') {
+      let geometry = 'bbox';
+      let types = 'within';
+      let radius = 0;
+      let bound_points = e.layer._latlngs[0];
+      let boundingPoints = [];
+      boundingPoints.push([bound_points[1]['lng'].toFixed(6), bound_points[1]['lat'].toFixed(6)]);
+      boundingPoints.push([bound_points[3]['lng'].toFixed(6), bound_points[3]['lat'].toFixed(6)]);
+      this.markersLayer.clearLayers();
+      this.api_call(boundingPoints, radius, types, geometry);
     }
   }
 
@@ -200,8 +219,6 @@ export class GeoMapComponent implements OnInit {
   }
 
   parseResourcesData(results: any) {
-    let city = this.global.get_city();
-
     return results.map((item: any) => {
       let uniqueID = item.resourceGroup.replace(/\//g, "-");
       let filter = this.datasets.filter((data: any) => {
@@ -217,11 +234,7 @@ export class GeoMapComponent implements OnInit {
         label: item.label,
         location: item.location,
         instance: item.instance,
-        icon: city ? city.icon : 'https://iudx-catalogue-assets.s3.ap-south-1.amazonaws.com/instances/default-city.png',
-        provider: provider,
-        itemStatus: item.itemStatus,
-        itemCreatedAt: item.itemCreatedAt,
-        // resourceType: item.resourceType
+        provider: provider
       }
     })
   }
