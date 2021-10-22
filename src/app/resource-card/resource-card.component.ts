@@ -11,6 +11,7 @@ export class ResourceCardComponent implements OnInit {
   @Input() dataset: any;
   showDataDescriptors: boolean = false;
   data_descriptor: any;
+  isAuthenticated = this.global.get_auth_token();
   flags: Array<Boolean>;
 
   constructor(private global: GlobalService) {
@@ -32,8 +33,14 @@ export class ResourceCardComponent implements OnInit {
   }
 
   openGsMap(resource: any): void {
-    this.global.set_single_resource(resource)
-    this.global.set_popup(true, 'gs-map');
+    if (this.isAuthenticated) {
+      if (this.global.get_role() !== 'consumer') return this.global.set_toaster('error', 'Login as a consumer to use the features of our website.');
+      this.global.set_single_resource(resource)
+      this.global.set_popup(true, 'gs-map');
+    } else {
+      this.global.set_popup(true, 'login-popup');
+    }
+
   }
 
   openFilesPopup(): void {
@@ -45,13 +52,12 @@ export class ResourceCardComponent implements OnInit {
   }
 
   openLatestData(id: string): void {
-    let token = this.global.get_auth_token();
-    if(token && token != '') {
-      if(this.global.get_role() != 'consumer') return this.global.set_toaster('error','Login as a consumer to use the features of our website.');
+    if (this.isAuthenticated) {
+      if (this.global.get_role() != 'consumer') return this.global.set_toaster('error', 'Login as a consumer to use the features of our website.');
       this.global.set_temp_data(id);
       this.global.set_popup(true, 'latest-data');
     } else {
-      this.global.set_popup(true,'login-popup');
+      this.global.set_popup(true, 'login-popup');
     }
   }
 
