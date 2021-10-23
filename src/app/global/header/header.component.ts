@@ -18,7 +18,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   showProfilePopup: boolean = false;
   auth_window: any;
   user_profile: any;
-  cookie_interval: any;
   role: any;
   constructor(private global: GlobalService, private keycloak: KeycloakService) {
     this.popup_sub = this.global.get_popup().subscribe((data) => {
@@ -47,10 +46,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   loggedIn(): void {
-   this.cookie_interval = setInterval(()=>{
-      this.listen_cookie();
-    },100);
-    open_window = window.open(environment.sso_url, '_blank');
+    this.global.login(this.keycloak);
   }
 
   toggleProfile(): void {
@@ -58,27 +54,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   logout(): void {
-    document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
-    this.global.set_auth_token('');
-    localStorage.removeItem('iudx-ui-cat-auth-token');
-    this.global.set_toaster('error','You have been logged out. Please login again.');
-    setTimeout(()=>{
-      this.keycloak.logout();
-    },100);
+    this.global.logout(this.keycloak);
   }
 
   ngOnDestroy(): void {
     this.popup_sub.unsubscribe();
-  }
-
-  listen_cookie() {
-    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1]) {
-      if(document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') {
-        clearInterval(this.cookie_interval);
-        open_window.close();
-        location.reload();
-      }
-    }
   }
 
   visit_profile() {

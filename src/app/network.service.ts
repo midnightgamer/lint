@@ -22,7 +22,7 @@ export class NetworkService {
     let headers: any = {};
     let token = this.global.get_auth_token();
     if (auth == 'auth' && token) {
-      headers["Authorization"] = this.global.get_auth_token();
+      headers["Authorization"] = token;
     }
     if (auth == 'cat') {
       headers["instance"] = this.global.get_active_city();
@@ -111,13 +111,7 @@ export class NetworkService {
   }
 
   unauthorizedErrorAlert() {
-    document.cookie = "iudx-ui-sso=logged-out;max-age=0;domain=" + environment.parent_domain;
-    this.global.set_auth_token('');
-    localStorage.removeItem('iudx-ui-cat-auth-token');
-    this.global.set_toaster('error', 'You have been logged out. Please login again.');
-    setTimeout(() => {
-      this.keycloak.logout();
-    }, 100);
+    this.global.set_toaster('error', 'User is not authorized to access this resource.');
   }
 
   get_url(url: any) {

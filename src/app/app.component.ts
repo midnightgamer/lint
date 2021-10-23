@@ -4,6 +4,7 @@ import { ApiService } from './api.service';
 import { GlobalService } from './global.service';
 import { KeycloakService } from 'keycloak-angular';
 import { get_keycloak } from './keycloak.init';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -47,22 +48,18 @@ export class AppComponent {
   }
 
   async analyse_user_login() {
-    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1] && document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') {
-      let lstoken = localStorage.getItem('iudx-ui-cat-auth-token');
-      if(lstoken && lstoken != ''){
-        await this.analyse_user_profile(lstoken);
-      } else {
-        await this.keycloak.isLoggedIn().then(async result => {
-          if(result) {
-            let token: any = await this.keycloak.getToken();
-            await this.analyse_user_profile("Bearer " + token);
-          } else {
-            this.keycloak.login({
-              redirectUri: window.location.href
-            });
-          }
-        });
-      }
+    if(this.global.get_cookie_value('iudx-ui-sso') == 'logged-in') {
+      await this.keycloak.isLoggedIn().then(async result => {
+        if(result) {
+          let token: any = await this.keycloak.getToken();
+          await this.analyse_user_profile("Bearer " + token);
+        } else {
+          this.keycloak.login({
+            redirectUri: window.location.href,
+            prompt: "none"
+          });
+        }
+      });
     }
     return true;
   }
@@ -88,7 +85,6 @@ export class AppComponent {
   }
 
   async analyse_user_profile(token: any) {
-    this.global.set_auth_token(token);
     let response: any = await this.api.get_user_profile();
     let profile = response.results;
     this.global.set_user_profile(response.results);

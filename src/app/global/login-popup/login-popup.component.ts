@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import { environment } from 'src/environments/environment';
+import { KeycloakService } from 'keycloak-angular';
 import {GlobalService} from "../../global.service";
-
-let open_window: any;
 
 @Component({
   selector: 'app-login-popup',
@@ -10,8 +8,8 @@ let open_window: any;
   styleUrls: ['./login-popup.component.scss']
 })
 export class LoginPopupComponent implements OnInit {
-  cookie_interval: any;
-  constructor(private global: GlobalService) {
+
+  constructor(private global: GlobalService, private keycloak: KeycloakService) {
   }
 
   ngOnInit(): void {
@@ -23,20 +21,7 @@ export class LoginPopupComponent implements OnInit {
   }
 
   loggedIn(): void {
-    this.cookie_interval = setInterval(()=>{
-      this.listen_cookie();
-    },100);
-    open_window = window.open(environment.sso_url, '_blank');
-  }
-
-  listen_cookie() {
-    if(document.cookie && document.cookie.split('iudx-ui-sso=')[1]) {
-      if(document.cookie.split('iudx-ui-sso=')[1].split(';')[0] == 'logged-in') {
-        clearInterval(this.cookie_interval);
-        open_window.close();
-        location.reload();
-      }
-    }
+    this.global.login(this.keycloak);
   }
 
 }

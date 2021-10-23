@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable, Subject} from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,6 @@ export class GlobalService {
   temp_data: any;
   single_resource: any
   dataset_res: any;
-  auth_token: any;
   res_token: any;
   request_dataset_id: string = '';
   map_colors: any = [
@@ -40,11 +40,12 @@ export class GlobalService {
   ];
   user_profile: any;
   role: any;
+  cookie_interval: any;
+  open_window: any;
 
   constructor() {
     this.temp_data = {};
     this.user_profile = {};
-    this.auth_token = '';
     this.res_token = {
       public: '',
       private: ''
@@ -293,12 +294,8 @@ export class GlobalService {
     this.dataset_res = res;
   }
 
-  set_auth_token(value: any) {
-    this.auth_token = value;
-  }
-
   get_auth_token() {
-    return this.auth_token;
+    return localStorage.getItem('iudx-ui-cat-auth-token');
   }
 
   set_res_token(key: any, value: any) {
@@ -323,6 +320,45 @@ export class GlobalService {
 
   get_request_dataset_id(): string {
     return this.request_dataset_id;
+  }
+
+  // Authentication Section
+
+  get_cookie_value(key: string): string {
+    let value = '';
+    if (document.cookie && document.cookie.split(key + '=')[1] &&
+      document.cookie.split(key + '=')[1].split(';')[0]) {
+      value = document.cookie.split(key + '=')[1].split(';')[0];
+    }
+    return value;
+  }
+
+  listen_cookie(keycloak: any): void {
+    if (this.get_cookie_value('iudx-ui-sso') == 'logged-in') {
+      clearInterval(this.cookie_interval);
+      this.open_window.close();
+      //location.reload();
+      keycloak.login({
+        redirectUri: window.location.href,
+        prompt: "none"
+      });
+    }
+  }
+
+  login(keycloak: any): void {
+    this.cookie_interval = setInterval(()=>{
+      this.listen_cookie(keycloak);
+    },100);
+    this.open_window = window.open(environment.sso_url, '_blank');
+  }
+
+  logout(keycloak: any): void {
+    document.cookie = "iudx-ui-sso='logged-out';path=/;max-age=0;domain=" + environment.parent_domain;
+    localStorage.removeItem('iudx-ui-cat-auth-token');
+    this.set_toaster('error','You have been logged out. Please login again.');
+    setTimeout(()=>{
+      keycloak.logout(window.location.href);
+    }, 100);
   }
 
 }
