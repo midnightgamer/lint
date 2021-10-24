@@ -121,8 +121,8 @@ export class ApiService {
     return data;
   }
 
-  async get_user_profile() {
-    return await this.network.get_api(environment.auth_url + 'auth/v1/user/profile', 'auth');
+  async get_user_profile(params?: any) {
+    return await this.network.get_api(environment.auth_url + 'auth/v1/user/profile', 'auth', '', params);
   }
 
   async get_res_public_token() {

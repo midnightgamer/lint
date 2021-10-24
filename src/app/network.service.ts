@@ -18,9 +18,9 @@ export class NetworkService {
     this.url = environment.mlayer_url;
   }
 
-  get_headers(auth: any, type?: string) {
+  get_headers(auth: any, type?: string, params?: any) {
     let headers: any = {};
-    let token = this.global.get_auth_token();
+    let token = (params && params.token) ? params.token : this.global.get_auth_token();
     if (auth == 'auth' && token) {
       headers["Authorization"] = token;
     }
@@ -33,10 +33,10 @@ export class NetworkService {
     return headers;
   }
 
-  get_api(url: string, auth?: string, type?: string) {
+  get_api(url: string, auth?: string, type?: string, params?: any) {
     this.global.set_loader(true);
     return new Promise((resolve, reject) => {
-      this.http.get(this.get_url(url), {headers: new HttpHeaders(this.get_headers(auth, type))}).subscribe(async (data: any) => {
+      this.http.get(this.get_url(url), {headers: new HttpHeaders(this.get_headers(auth, type, params))}).subscribe(async (data: any) => {
         this.global.set_loader(false);
         resolve(data);
       }, async (err) => {
@@ -111,7 +111,7 @@ export class NetworkService {
   }
 
   unauthorizedErrorAlert() {
-    this.global.set_toaster('error', 'User is not authorized to access this resource.');
+    this.global.set_toaster('error', "You don't have access to some of the resources in this panel.");
   }
 
   get_url(url: any) {

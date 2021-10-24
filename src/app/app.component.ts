@@ -4,7 +4,6 @@ import { ApiService } from './api.service';
 import { GlobalService } from './global.service';
 import { KeycloakService } from 'keycloak-angular';
 import { get_keycloak } from './keycloak.init';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -85,7 +84,7 @@ export class AppComponent {
   }
 
   async analyse_user_profile(token: any) {
-    let response: any = await this.api.get_user_profile();
+    let response: any = await this.api.get_user_profile({ token });
     let profile = response.results;
     this.global.set_user_profile(response.results);
     let role = response.results.roles.includes('consumer') ? 'consumer' : 'non-consumer';
@@ -93,7 +92,7 @@ export class AppComponent {
     if(profile.roles.includes('consumer')) {
       localStorage.setItem('iudx-ui-cat-auth-token',token);
     } else {
-      this.global.set_toaster('error',"You don't have access to this panel.");
+      this.global.set_toaster('error',"You don't have access to some of the resources in this panel.");
     }
     return true;
   }

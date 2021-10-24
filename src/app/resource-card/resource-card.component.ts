@@ -11,7 +11,7 @@ export class ResourceCardComponent implements OnInit {
   @Input() dataset: any;
   showDataDescriptors: boolean = false;
   data_descriptor: any;
-  isAuthenticated = this.global.get_auth_token();
+  isAuthenticated = this.global.get_cookie_value('iudx-ui-sso') == 'logged-in';
   flags: Array<Boolean>;
 
   constructor(private global: GlobalService) {
