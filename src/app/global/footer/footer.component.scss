@@ -43,18 +43,23 @@ footer {
     align-items: center;
 
 
-
     .flex-parent {
       display: flex;
       width: 30%;
       justify-content: space-between;
-      a {
-        align-self: center;
 
-        &:not(:last-child) {
-          margin-right: 30px;
+      img {
+        margin-right: 30px;
+
+        &.iisc-logo {
+          margin: 0;
         }
       }
+
+      a {
+        align-self: center;
+      }
+
       img {
 
       }
