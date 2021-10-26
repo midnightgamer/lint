@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {GlobalService} from 'src/app/global.service';
-import { environment } from 'src/environments/environment';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-menu',
@@ -11,10 +11,12 @@ import { environment } from 'src/environments/environment';
 export class MenuComponent implements OnInit {
   showDocsLinks: any;
   showDevsLinks: any;
+  public env: any;
 
   constructor(private global: GlobalService, private router: Router) {
     this.showDocsLinks = false;
     this.showDevsLinks = false;
+    this.env = environment;
   }
 
   ngOnInit(): void {

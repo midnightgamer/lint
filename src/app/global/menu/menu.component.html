@@ -18,17 +18,19 @@
           <ul *ngIf='showDevsLinks'>
             <li class="submenu"
                 (click)=" $event.stopPropagation()"><a
-              href="https://api.catalogue.iudx.org.in/apis"
+              [href]="env.cat_url.split('/iudx')[0] + '/apis'"
               target="_blank"
             >Catalogue API Docs</a></li>
             <li class="submenu"
                 (click)=" $event.stopPropagation()"><a
-              href="https://rs.iudx.org.in/apis" target="_blank">Resource Server
+              [href]="env.res_url + 'apis'" target="_blank">Resource Server
               API
               Docs</a></li>
             <li class="submenu"
                 (click)=" $event.stopPropagation()"><a
-              href="https://authdocs.iudx.org.in/" target="_blank">Auth Server
+              [href]="env.auth_url + 'apis'"
+              target="_blank">Auth
+              Server
               API
               Docs</a></li>
           </ul>
@@ -58,7 +60,8 @@
       <ul class="links-secondary">
         <li><a (click)="closePopup()" href="https://iudx.org.in/"
                target="_blank">About IUDX</a></li>
-        <li><a href="" (click)="navigateToProviderPanel()">Become a publisher</a></li>
+        <li><a href="" (click)="navigateToProviderPanel()">Become a
+          publisher</a></li>
       </ul>
     </div>
   </div>
