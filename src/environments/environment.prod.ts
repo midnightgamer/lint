@@ -4,7 +4,7 @@ export const environment = {
   web_url: 'catalogue.iudx.org.in',
   res_url: 'https://rs.iudx.org.in/',
   cat_url: 'https://api.catalogue.iudx.org.in/iudx/cat/v1/',
-  auth_url: 'https://auth.iudx.org.in/',
+  auth_url: 'https://authorization.iudx.org.in/',
   sso_url: 'https://authsso.iudx.org.in/',
   consumer_web: 'https://consumer.iudx.org.in/',
   provider_web: 'https://publisher.iudx.org.in/',
