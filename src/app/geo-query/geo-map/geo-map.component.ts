@@ -18,6 +18,7 @@ export class GeoMapComponent implements OnInit {
   datasets: any = [];
   dataset_filters: any = [];
   resources: any;
+  initialResources: any;
   markersLayer = new L.FeatureGroup();
   pathFillColor: string[] = this.global.get_map_colors();
   polygonColor: string[] = this.global.get_map_colors();
@@ -53,11 +54,16 @@ export class GeoMapComponent implements OnInit {
   }
 
   on_map_ready(map: Map) {
+    map.on('draw:deleted',  (e) =>{
+     this.resources = this.initialResources;
+     this.mark_on_map();
+    });
     this.map = map;
   }
 
   initMap() {
     let zoom = 11;
+
     return {
       layers: [
         L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {maxZoom: 19})
@@ -152,6 +158,7 @@ export class GeoMapComponent implements OnInit {
       .get_geoquery_resource_list(filters)
       .then((data: any) => {
         this.resources = data;
+        this.initialResources = data;
         this.mark_on_map();
       });
   }
@@ -243,4 +250,5 @@ export class GeoMapComponent implements OnInit {
       }
     })
   }
+
 }
