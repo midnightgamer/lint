@@ -187,7 +187,10 @@ export class GeoMapComponent implements OnInit {
       point.push(this.get_precision(center_point['lng'], 6), this.get_precision(center_point['lat'], 6));
       let radius = Math.ceil(e.layer._mRadius);
       this.markersLayer.clearLayers();
-      if (radius > 10000) e.layer.setRadius(10000)
+      if (radius > 10000) {
+        e.layer.setRadius(10000);
+        radius = 10000;
+      }
       this.api_call(point, radius, types, geometry);
     } else if (type === 'polygon') {
       let geometry = 'Polygon';
