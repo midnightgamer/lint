@@ -180,6 +180,7 @@ export class GeoMapComponent implements OnInit {
       point.push(this.get_precision(center_point['lng'], 6), this.get_precision(center_point['lat'], 6));
       let radius = Math.ceil(e.layer._mRadius);
       this.markersLayer.clearLayers();
+      if (radius > 10000) e.layer.setRadius(10000)
       this.api_call(point, radius, types, geometry);
     } else if (type === 'polygon') {
       let geometry = 'Polygon';
@@ -193,7 +194,7 @@ export class GeoMapComponent implements OnInit {
       let radius = 0;
       this.markersLayer.clearLayers();
       this.api_call(polyPoints, radius, types, geometry);
-    }else if (type === 'rectangle') {
+    } else if (type === 'rectangle') {
       let geometry = 'bbox';
       let types = 'within';
       let radius = 0;
