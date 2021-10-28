@@ -10,10 +10,11 @@ export class AccessTagsComponent implements OnInit {
 	age: number;
 	name: string;
 	job: string;
+  
 	person: string;
 
   
-  
+
 
 	constructor() {
 		this.name = 'Aakash';
