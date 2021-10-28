@@ -1,5 +1,14 @@
 {
+  "extends": ["@commitlint/config-conventional"],
   "rules": {
-    "type-enum": [2, "always", ["ci", "chore", "docs", "feat", "fix", "perf", "refactor", "revert", "style"]]
+      "type-enum": [2, "always", ["FEATURE","FIX","REFACTOR","REVERT","STYLE","DOCS","TEST"]],
+      "type-case": [2, "always", "upper-case"],
+      "subject-case": [2,"never",["lower-case",
+          "upper-case",
+          "camel-case",
+          "kebab-case",
+          "pascal-case",
+          "snake-case",
+          "start-case"]]
   }
 }
