@@ -15,10 +15,11 @@ export class DataDomainsComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-
-
     this.domains = await this.api.get_domains();
     //console.log(this.domains);
+
+
+
   }
 
   goToDatasets(domain?: any): void {
