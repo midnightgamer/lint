@@ -9,6 +9,12 @@
     "lint": "ng lint",
     "pre-commit": "lint-staged"
   },
+  "lint-staged": {
+    "*.{js,json,css,scss,md,ts,html}": [
+      "prettier --write",
+      "eslint --fix"
+    ]
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "12.1.1",
