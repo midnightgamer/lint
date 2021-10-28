@@ -10,7 +10,9 @@ export class BannerComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let iem = 'sds';
+    var iem =
+      'sdsfeefe';
+    console.log('sdsd')
   }
 
 }
