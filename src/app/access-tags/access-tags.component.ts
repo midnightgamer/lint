@@ -14,6 +14,7 @@ export class AccessTagsComponent implements OnInit {
 	constructor() {
 		this.name = "Aakash";
 		this.age = 24;
+
 		this.job = "UI Engineer";
 	}
 	ngOnInit(): void {
@@ -22,6 +23,7 @@ export class AccessTagsComponent implements OnInit {
 
 	sayHello(params: string): string {
 		const name = params;
+
 		return name;
 	}
 }
