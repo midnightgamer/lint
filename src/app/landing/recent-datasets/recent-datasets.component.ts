@@ -16,13 +16,13 @@ export class RecentDatasetsComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-          doSearch(): void {
-            const filters = this.global.get_default_filters();
-            this.global.set_filters(filters);
-            this.router.navigate(["/datasets"]);
-          }
+              doSearch(): void {
+                const filters = this.global.get_default_filters();
+                this.global.set_filters(filters);
+                this.router.navigate(["/datasets"]);
+              }
 
-	goToSingleResource(dataset: any): void {
-		this.router.navigate(["/dataset", dataset.unique_id]);
-	}
+              goToSingleResource(dataset: any): void {
+                this.router.navigate(["/dataset", dataset.unique_id]);
+              }
 }
