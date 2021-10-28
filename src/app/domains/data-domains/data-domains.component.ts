@@ -19,7 +19,7 @@ export class DataDomainsComponent implements OnInit {
     //console.log(this.domains);
 
 
-
+  var newvarr = 'var'
   }
 
   goToDatasets(domain?: any): void {
