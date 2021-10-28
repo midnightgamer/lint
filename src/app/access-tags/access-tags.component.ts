@@ -23,7 +23,6 @@ export class AccessTagsComponent implements OnInit {
 
 	sayHello(params: string): string {
 		const name = params;
-
 		return name;
 	}
 }
