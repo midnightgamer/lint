@@ -1,7 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "cli": {
-    "analytics": "7f0ac6a1-8631-4a7a-80ba-dc7fcb7b62a0"
+    "analytics": "7f0ac6a1-8631-4a7a-80ba-dc7fcb7b62a0",
+    "defaultCollection": "@angular-eslint/schematics"
   },
   "version": 1,
   "newProjectRoot": "projects",
@@ -130,6 +131,15 @@
               "./node_modules/leaflet-draw/dist/leaflet.draw.css"
             ],
             "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "lintFilePatterns": [
+              "src/**/*.ts",
+              "src/**/*.html"
+            ]
           }
         }
       }

@@ -6,7 +6,19 @@
     "start": "ng serve --open --port 4000",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "lint": "ng lint"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.ts": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "private": true,
   "dependencies": {
@@ -30,18 +42,31 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "12.1.1",
+    "@angular-eslint/builder": "12.6.1",
+    "@angular-eslint/eslint-plugin": "12.6.1",
+    "@angular-eslint/eslint-plugin-template": "12.6.1",
+    "@angular-eslint/schematics": "12.6.1",
+    "@angular-eslint/template-parser": "12.6.1",
     "@angular/cli": "12.1.1",
     "@angular/compiler-cli": "12.1.1",
     "@types/jasmine": "3.6.0",
     "@types/leaflet": "^1.7.5",
     "@types/leaflet-draw": "^1.0.5",
     "@types/node": "12.11.1",
+    "@typescript-eslint/eslint-plugin": "4.28.2",
+    "@typescript-eslint/parser": "4.28.2",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "7.0.4",
     "jasmine-core": "3.7.0",
     "karma": "6.3.0",
     "karma-chrome-launcher": "3.1.0",
     "karma-coverage": "2.0.3",
     "karma-jasmine": "4.0.0",
     "karma-jasmine-html-reporter": "1.5.0",
+    "lint-staged": "11.2.6",
+    "prettier": "^2.4.1",
     "typescript": "4.3.2"
   }
 }
