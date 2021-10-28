@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
 	selector: "app-access-tags",
@@ -7,17 +7,21 @@ import { Component, Input, OnInit } from "@angular/core";
 })
 export class AccessTagsComponent implements OnInit {
 	verified = false;
-	fall: any;
-	name: any;
+	age: number;
+	name: string;
+	job: string;
 
 	constructor() {
 		this.name = "Aakash";
+		this.age = 24;
+		this.job = "UI Engineer";
 	}
 	ngOnInit(): void {
-		this.fall = true;
+		this.sayHello("hey aakash");
 	}
 
-	sayHello() {
-		const arg = "Shubham";
+	sayHello(params: string): string {
+		const name = params;
+		return name;
 	}
 }
