@@ -1,20 +1,24 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-access-tags',
-  templateUrl: './access-tags.component.html',
-  styleUrls: ['./access-tags.component.scss']
+	selector: "app-access-tags",
+	templateUrl: "./access-tags.component.html",
+	styleUrls: ["./access-tags.component.scss"]
 })
 export class AccessTagsComponent implements OnInit {
-  @Input() type: any;
+	verified = false;
+	fall: any;
+	name: any;
 
-  constructor() { }
+	constructor() {
+		this.name = "Aakash";
+	}
+	ngOnInit(): void {
+		this.fall = true;
+	}
 
-  ngOnInit(): void {
-  }
-
-
-
-  
-
+	sayHello() {
+		const arg = "Shubham";
+		return arg;
+	}
 }
