@@ -16,9 +16,9 @@ export class AccessTagsComponent implements OnInit {
 		this.name = 'Aakash';
 		this.age = 24;
 		this.person = 'Male';
-
 		this.job = 'UI Engineer';
 	}
+
 	ngOnInit(): void {
 		this.sayHello('hey aakash');
 	}
