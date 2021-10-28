@@ -19,6 +19,5 @@ export class AccessTagsComponent implements OnInit {
 
 	sayHello() {
 		const arg = "Shubham";
-		return arg;
 	}
 }
